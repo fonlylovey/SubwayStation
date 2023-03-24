@@ -1,0 +1,98 @@
+[0323/161342.747:VERBOSE1:pref_proxy_config_tracker_impl.cc(186)] 00005A44004602C0: set chrome proxy config service to 00005A4400350340
+[0323/161342.770:VERBOSE1:webrtc_internals.cc(118)] Could not get the download directory.
+[0323/161342.774:VERBOSE1:media_stream_manager.cc(705)] MSM::InitializeMaybeAsync([this=00005A440046C3C0])
+[0323/161342.774:VERBOSE1:media_stream_manager.cc(705)] MDM::MediaDevicesManager()
+[0323/161342.775:VERBOSE1:media_stream_manager.cc(705)] MSM::MediaStreamManager([this=00005A440046C3C0]))
+[0323/161342.835:VERBOSE1:pref_proxy_config_tracker_impl.cc(186)] 00005A44004618C0: set chrome proxy config service to 00005A4400351520
+[0323/161343.115:INFO:cpu_info.cc(53)] Available number of cores: 16
+[0323/161343.115:INFO:cpu_info.cc(53)] Available number of cores: 16
+[0323/161343.133:VERBOSE1:simple_index_file.cc(583)] Simple Cache Index is being restored from disk.
+[0323/161343.133:VERBOSE1:simple_index_file.cc(583)] Simple Cache Index is being restored from disk.
+[0323/161343.141:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/#%5B%5D
+[0323/161343.257:VERBOSE1:video_capture_oracle.cc(96)] Capture size auto-throttling is now enabled.
+[0323/161343.257:VERBOSE1:video_capture_oracle.cc(124)] Capture size auto-throttling is now disabled.
+[0323/161343.257:VERBOSE1:capture_resolution_chooser.cc(205)] Recomputed snapped frame sizes: 2400x1350
+[0323/161343.257:VERBOSE1:capture_resolution_chooser.cc(157)] Recomputed capture size from 640x360 to 2400x1350 (100% of ideal size)
+[0323/161343.266:VERBOSE1:media_stream_manager.cc(705)] RFAOSF::Core() [process_id=5, frame_id=1]
+[0323/161343.282:VERBOSE1:script_context.cc(189)] Created context:
+  extension id:           (none)
+  frame:                  00005B7F06E62378
+  URL:                    
+  context_type:           UNSPECIFIED
+  effective extension id: (none)
+  effective context type: UNSPECIFIED
+[0323/161343.283:VERBOSE1:script_context.cc(189)] Created context:
+  extension id:           (none)
+  frame:                  0000000000000000
+  URL:                    
+  context_type:           UNSPECIFIED
+  effective extension id: (none)
+  effective context type: UNSPECIFIED
+[0323/161343.283:VERBOSE1:dispatcher.cc(434)] Num tracked contexts: 1
+[0323/161346.993:VERBOSE1:document.cc(3712)] Document::DispatchUnloadEvents() URL = <null>
+[0323/161346.993:VERBOSE1:document.cc(3792)] Actually dispatching an UnloadEvent: URL = <null>
+[0323/161347.019:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css
+[0323/161347.020:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/lib/jquery-3.6.0.min.js
+[0323/161347.020:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/lib/mapmost-ue.min.js
+[0323/161347.020:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js
+[0323/161347.020:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/menu.js
+[0323/161347.021:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/index.js
+[0323/161347.717:VERBOSE1:capture_resolution_chooser.cc(205)] Recomputed snapped frame sizes: 2400x1350
+[0323/161347.722:INFO:CONSOLE(2)] "Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.", source: http://localhost:4321/Demo/lib/jquery-3.6.0.min.js (2)
+[0323/161347.724:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/data/road.js
+[0323/161347.778:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/Camera.js
+[0323/161348.102:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/Layer.js
+[0323/161348.345:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/LayerPOI.js
+[0323/161348.418:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/LayerLine.js
+[0323/161348.667:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/LayerModel.js
+[0323/161348.724:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/LayerHeatmap.js
+[0323/161348.989:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/LayerMarker.js
+[0323/161349.031:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/LayerFill.js
+[0323/161349.311:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/LayerFillExtrusion.js
+[0323/161349.337:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/SAVideoFusion.js
+[0323/161349.621:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/SAMeasure.js
+[0323/161349.648:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/SAClip.js
+[0323/161349.933:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/SAViewshed.js
+[0323/161349.960:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/SightLineAnalysis.js
+[0323/161350.241:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/SkyLineAnalysis.js
+[0323/161350.271:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/LimitHeightAnalysis.js
+[0323/161350.556:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/Tools.js
+[0323/161350.583:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/ToolsMapRoam.js
+[0323/161350.868:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/PipelineEvent.js
+[0323/161350.895:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/IQuery.js
+[0323/161351.182:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/PipelineAnalysis.js
+[0323/161351.208:VERBOSE1:network_delegate.cc(32)] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:4321/Demo/js/Theme/CustomFuntion.js
+[0323/161351.509:VERBOSE1:capture_resolution_chooser.cc(205)] Recomputed snapped frame sizes: 2400x1350
+[0323/161351.535:VERBOSE1:capture_resolution_chooser.cc(205)] Recomputed snapped frame sizes: 1560x897
+[0323/161351.535:VERBOSE1:capture_resolution_chooser.cc(157)] Recomputed capture size from 2400x1350 to 1560x897 (100% of ideal size)
+[0323/161543.015:ERROR:gpu_init.cc(441)] Passthrough is not supported, GL is disabled
+[0323/162001.654:VERBOSE1:statistics_recorder.cc(471)] Collections of all histograms
+Histogram: ChildProcess.FieldTrials.CreateFromShmemSuccess recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: LevelDBEnv.DeleteTableBackupFile recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: SharedMemory.MapBlockedForSecurity recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: ThreadPool.NumTasksBeforeDetach.ContentChild.Background recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: ThreadPool.NumTasksBeforeDetach.ContentChild.Foreground recorded 2 samples, mean = 0.5 (flags = 0x1)
+0  -O                                                                        (1 = 50.0%)
+1  -O                                                                        (1 = 50.0%) {50.0%}
+2  ... 
+
+Histogram: V8.Initializer.LoadV8Snapshot.Result recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: V8.Initializer.OpenV8File.Result recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+

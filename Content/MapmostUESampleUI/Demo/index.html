@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>园区demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="lib/jquery-3.6.0.min.js"></script>
+    <script src="lib/mapmost-ue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <!--    <script src="./menu.js"></script>-->
+    <style>
+        ul, li, h4 {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .wrapper {
+            width: 380px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            padding: 10px 10px;
+            background-color: rgba(0, 0, 0, 0.34);
+            overflow: auto;
+            /*滚动条*/
+        }
+
+        .collapsible::after {
+            content: "«";
+            font-size: 26px;
+            color: rgba(239, 239, 239, 0.9);
+            background-color: rgba(0, 0, 0, 0.5);
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            width: 30px;
+            position: absolute;
+            top: 0px;
+            left: 410px;
+
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+            cursor: pointer;
+            pointer-events: all;
+        }
+
+        .isCollapsed::after {
+            transition: flex-basis .15s ease-in;
+            content: "»";
+            top: 0px;
+            left: 10px;
+        }
+
+
+        .menu {
+            padding: 5px 0;
+        }
+
+        .title > span {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 22px;
+        }
+
+        .title > h4 {
+            padding: 6px 12px;
+            text-align: left;
+        }
+
+        .menu > .child_ul {
+            /*background-color: rgba(213, 213, 213, 0.4);*/
+            display: none;
+            padding: 10px;
+        }
+
+        .selected {
+            background: rgb(184, 184, 184);
+        }
+
+
+        .title {
+            background: rgba(43, 59, 59, 0.83);
+            position: relative;
+            text-align: center;
+            line-height: 22px;
+            /* border-bottom: solid 1px #DED; */
+            cursor: pointer;
+            color: #fff;
+            /*border-radius:2px ;*/
+        }
+
+        .title:hover {
+            background: rgba(56, 93, 93, 0.79);
+        }
+
+        button {
+            margin: 4px;
+            cursor: pointer;
+            padding: 6px;
+            /* width: 80px; */
+            height: 30px;
+            border: none;
+            /*border-radius: 2px;*/
+            background-color: rgba(45, 52, 52, 0.68);
+            color: #fff;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: rgba(0, 0, 0, 0.65);
+        }
+
+        .wrapper::-webkit-scrollbar {
+            width: 5px;
+            height: 10px;
+            /*background-color: #b5b1b1;*/
+        }
+
+        .wrapper::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1)
+        }
+
+        .wrapper::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+            background-color: rgba(56, 93, 93, 0.79);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            right: 0;
+            padding-right: 20px;
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        .subClass {
+            background-color: rgba(121,106,70, 0.83);
+            padding: 4px;
+            color: #ffffff;
+        }
+        
+        .btnHide{
+            background-color: rgb(143 143 143 / 68%);
+            color: #504d4d;
+        }
+
+        .btnHide:hover{
+            background-color: rgb(143 143 143 / 68%);
+            color: #504d4d;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="collapsible" id="main">
+</div>
+<div class="wrapper">
+    <!--    <div class="menu">-->
+    <!--        <div class="title">-->
+    <!--            <h4>Java</h4>-->
+    <!--            <span>+</span>-->
+    <!--        </div>-->
+
+    <!--        <div class="child_ul">-->
+    <!--            <button>测试</button>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+</div>
+
+
+<script src="js/menu.js"></script>
+<script src="js/index.js"></script>
+<script>
+
+    // 添加面板收起功能
+    $("#main").click(function () {
+        $("#main").toggleClass('isCollapsed');
+        $(".wrapper").toggle();
+    })
+</script>
+</body>
+</html>

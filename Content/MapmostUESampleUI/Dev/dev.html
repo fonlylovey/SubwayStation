@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>园区demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="../Demo/lib/jquery-3.6.0.min.js"></script>
+    <script>
+        "object" != typeof ue && (ue = {}), uuidv4 = function () { return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, function (t) { return (t ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> t / 4).toString(16) }) }, ue5 = function (r) { return "object" != typeof ue.interface || "function" != typeof ue.interface.broadcast ? (ue.interface = {}, function (t, e, n, o) { var u, i; "string" == typeof t && ("function" == typeof e && (o = n, n = e, e = null), u = [t, "", r(n, o)], void 0 !== e && (u[1] = e), i = encodeURIComponent(JSON.stringify(u)), "object" == typeof history && "function" == typeof history.pushState ? (history.pushState({}, "", "#" + i), history.pushState({}, "", "#" + encodeURIComponent("[]"))) : (document.location.hash = i, document.location.hash = encodeURIComponent("[]"))) }) : (i = ue.interface, ue.interface = {}, function (t, e, n, o) { var u; "string" == typeof t && ("function" == typeof e && (o = n, n = e, e = null), u = r(n, o), void 0 !== e ? i.broadcast(t, JSON.stringify(e), u) : i.broadcast(t, "", u)) }); var i }(function (t, e) { if ("function" != typeof t) return ""; var n = uuidv4(); return ue.interface[n] = t, setTimeout(function () { delete ue.interface[n] }, 1e3 * Math.max(1, parseInt(e) || 0)), n });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <!--    <script src="./menu.js"></script>-->
+    <style>
+        ul, li, h4 {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .wrapper {
+            width: 380px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            padding: 10px 10px;
+            background-color: rgba(92, 184, 122, 0.12);
+            overflow: auto;
+            /*滚动条*/
+        }
+
+        .collapsible::after {
+            content: "«";
+            font-size: 26px;
+            color: rgba(239, 239, 239, 0.9);
+            background-color: rgba(0, 0, 0, 0.5);
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            width: 30px;
+            position: absolute;
+            top: 0px;
+            left: 410px;
+
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+            cursor: pointer;
+            pointer-events: all;
+        }
+
+        .isCollapsed::after {
+            transition: flex-basis .15s ease-in;
+            content: "»";
+            top: 0px;
+            left: 10px;
+        }
+
+
+        .menu {
+            padding: 5px 0;
+        }
+
+        .title > span {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 22px;
+        }
+
+        .title > h4 {
+            padding: 6px 12px;
+            text-align: left;
+        }
+
+        .menu > .child_ul {
+            /*background-color: rgba(213, 213, 213, 0.4);*/
+            display: none;
+            padding: 10px;
+        }
+
+        .selected {
+            background: rgb(184, 184, 184);
+        }
+
+
+        .title {
+            background: rgba(92, 184, 122, 0.83);
+            position: relative;
+            text-align: center;
+            line-height: 22px;
+            /* border-bottom: solid 1px #DED; */
+            cursor: pointer;
+            color: #fff;
+            /*border-radius:2px ;*/
+        }
+
+        .title:hover {
+            background: rgba(92, 240, 122, 0.79);
+        }
+
+        button {
+            margin: 4px;
+            cursor: pointer;
+            padding: 6px;
+            /* width: 80px; */
+            height: 30px;
+            border: none;
+            /*border-radius: 2px;*/
+            background-color: rgba(45, 52, 52, 0.68);
+            color: #fff;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: rgba(102, 204, 255, 0.65);
+        }
+
+        .wrapper::-webkit-scrollbar {
+            width: 5px;
+            height: 10px;
+            /*background-color: #b5b1b1;*/
+        }
+
+        .wrapper::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1)
+        }
+
+        .wrapper::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+            background-color: rgba(56, 93, 93, 0.79);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            right: 0;
+            padding-right: 20px;
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        .subClass {
+            background-color: rgba(102, 204, 255, 0.83);
+            padding: 4px;
+            color: #ffffff;
+        }
+
+        .btnHide{
+            background-color: rgb(143 143 143 / 68%);
+            color: #504d4d;
+        }
+
+        .btnHide:hover{
+            background-color: rgb(143 143 143 / 68%);
+            color: #504d4d;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="app">
+    <div class="collapsible" id="main">
+
+    </div>
+
+    <div class="wrapper">
+        <!--    <div class="menu">-->
+        <!--        <div class="title">-->
+        <!--            <h4>Java</h4>-->
+        <!--            <span>+</span>-->
+        <!--        </div>-->
+
+        <!--        <div class="child_ul">-->
+        <!--            <button>测试</button>-->
+        <!--        </div>-->
+        <!--    </div>-->
+
+    </div>
+    <!--    <el-button @click="drawer = true" type="primary" >-->
+    <!--        点我打开-->
+    <!--    </el-button>-->
+    <el-drawer title="视域分析参数调整" :visible.sync="ViewAnalysisPanelShow" :with-header="true" direrction="rtl" :modal="false" size="30%">
+        <span style="margin-left: 20px;">水平开合角</span>
+        <el-slider style="margin-left: 20px;margin-right: 20px"
+                   v-model="horizontalDegree"
+                   @change="onHorizontalDegreeChanged"
+                   show-input>
+        </el-slider>
+        <span style="margin-left: 20px;">纵向开合角</span>
+        <el-slider style="margin-left: 20px;margin-right: 20px"
+                   v-model="verticalDegree"
+                   @change="onVerticalDegreeChanged"
+                   show-input>
+        </el-slider>
+        <span style="margin-left: 20px;">视距</span>
+        <el-slider style="margin-left: 20px;margin-right: 20px"
+                   v-model="viewDistance"
+                   @change="onViewDistanceChanged"
+                   :max="100000"
+                   show-input>
+        </el-slider>
+    </el-drawer>
+    <el-drawer title="视频融合参数调整" :visible.sync="VideoFusionShow" :with-header="true" direrction="rtl" :modal="false" size="30%">
+        <span style="margin-left: 20px;">FOV</span>
+        <el-slider style="margin-left: 20px;margin-right: 20px"
+                   v-model="fov"
+                   @change="onFovChanged"
+                   show-input>
+        </el-slider>
+        <span style="margin-left: 20px;">视距</span>
+        <el-slider style="margin-left: 20px;margin-right: 20px"
+                   v-model="vfDistance"
+                   @change="onVfDistanceChanged"
+                   :max="2000"
+                   show-input>
+        </el-slider>
+    </el-drawer>
+</div>
+
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="menu.js"></script>
+<script src="dev.js"></script>
+<script>
+
+    console.log('我是Dev~')
+
+    var app = new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                ViewAnalysisPanelShow: false,
+                VideoFusionShow: false,
+                fov:80,
+                vfDistance:1000,
+                horizontalDegree:45,
+                verticalDegree:45,
+                viewDistance:10000
+            }
+        },
+        methods:{
+            onHorizontalDegreeChanged(val){
+                console.log('HorizontalDegree:' + val)
+                ue5("SpatialAnalysis", {
+                    "module": "SpatialAnalysis",
+                    "subModule": "ViewshedAnalysis",
+                    "method": "updateViewshedAnalysis",
+                    "data": {
+                        "horizontalDegree": val,
+                        "verticalDegree": this.verticalDegree,
+                        "viewDistance": this.viewDistance
+                    }
+                });
+            },
+            onVerticalDegreeChanged(val){
+                console.log('VerticalDegree:' + val)
+                ue5("SpatialAnalysis", {
+                    "module": "SpatialAnalysis",
+                    "subModule": "ViewshedAnalysis",
+                    "method": "updateViewshedAnalysis",
+                    "data": {
+                        "horizontalDegree": this.horizontalDegree,
+                        "verticalDegree": val,
+                        "viewDistance": this.viewDistance
+                    }
+                });
+            },
+            onViewDistanceChanged(val){
+                console.log('ViewDistance:' + val)
+                ue5("SpatialAnalysis", {
+                    "module": "SpatialAnalysis",
+                    "subModule": "ViewshedAnalysis",
+                    "method": "updateViewshedAnalysis",
+                    "data": {
+                        "horizontalDegree": this.horizontalDegree,
+                        "verticalDegree": this.verticalDegree,
+                        "viewDistance": val
+                    }
+                });
+            },
+            onFovChanged(val){
+                console.log('Fov:' + val)
+            },
+            onVfDistanceChanged(val){
+                console.log('VfDistance:' + val)
+            }
+
+        }
+    })
+
+    // // 用于泰兴测试
+    // ue5("Layer", {
+    //     "module": "Layer",
+    //     "subModule": "Point",
+    //     "method": "addMarker",
+    //     "data": {
+    //         "id":"marker1",
+    //         "name":"Classic Marker",
+    //         "type":"classic",
+    //         // "location":[120.67392,31.319742,20],
+    //         "location":[119.977816,32.173262,4.971],
+    //         "icon":"http://192.168.34.213:8888/XiXi/icon/monitor.png",
+    //         "isShowIcon":false, // 该字段可选。不加该字段的话默认是显示icon的
+    //         "enableAutoFlyTo": true,
+    //         "labelBgColor":"#669966",
+    //         "imageUrl":"http://192.168.34.213:8888/XiXi/icon/monitor.png"
+    //     }
+    // })
+
+    // 地图坐标拾取，返回点击的对象和坐标值的监听
+    ue.interface.onMousePickListener = function (val) {
+        console.log(val)
+        // // 根据点击的对象名称查询属性mock数据
+        // // let url = "https://yapi.dpark.com.cn/mock/145/getModelInfo?modelId=" + val.modelName;
+        // let url = "https://yapi.dpark.com.cn/mock/145/getModelInfo?modelId=123";
+        // fetch(url).then(res => res.json()).then(response => {
+        //     console.log(response.data)
+        // });
+        // // 高亮点击中的模型
+        // ue5("Tools", {
+        //     "module": "Tools",
+        //     "subModule": "VisualEffect",
+        //     "method": "highlightModel",
+        //     "data": {
+        //         "modelName": val.modelName
+        //     }
+        // })
+    };
+
+    // 地图变化状态监听
+    ue.interface.onMapStatusChangeListener = function (val) {
+        console.log(val)
+    };
+
+    // flyTo结束监听
+    ue.interface.onFlyToEndListener = function (val) {
+        alert("flyTo执行结束")
+    };
+
+    // flyToTarget结束监听
+    ue.interface.onFlyToTargetEndListener = function (val) {
+        alert("flyTo执行结束")
+    };
+
+    ue.interface.onPOIClickListener = function (val) {
+        console.log(val)
+    };
+
+    ue.interface.onPOIExpandCollapseListener = function (val) {
+        console.log(val)
+    };
+
+    ue.interface.onMarkerClickListener = function (val) {
+        console.log(val)
+    };
+
+    ue.interface.onPipelineClickListener = function (val) {
+        
+    };
+
+    ue.interface.onRoamIntervalListener = function (val) {
+        console.log(val)
+    };
+
+    ue.interface.onSubLevelLoaded = function (val){
+        console.log("子关卡" + val.levelName + "已加载。")
+    }
+
+    ue.interface.onClipBoxAdded = function(){
+        console.log("剖切已添加！")
+    }
+
+    // 添加面板收起功能
+    $("#main").click(function () {
+        $("#main").toggleClass('isCollapsed');
+        $(".wrapper").toggle();
+    })
+</script>
+</body>
+</html>
+
+
