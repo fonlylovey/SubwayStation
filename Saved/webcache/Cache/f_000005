@@ -1,472 +1,590 @@
-// POI图层
-
-// 添加POI
-const popupUrl = "http://192.168.34.213:8888/SIPSD/poi/";
-
+﻿ let i = 0
+// 添加POI图层
 $("#addPOI").click(function () {
-    let poiData = {
-        "type": "FeatureCollection",
-        "name": "geo_samp",
-        "crs": {
-            "type": "name",
-            "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}
-        },
-        "features": [
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location1",            // POI ID
-                    "name": "东方之门",           // POI 名称
-                    "desc": "较拥挤",
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "addPOIs",
+        "data": {
+            "layerId":"Layer1",
+            "poidata":[
+                {
+                    "id":"location1",
+                    "name":"东方之门",
+                    // "url":"https://www.baidu.com",
+                    "location":[120.675362,31.318861,53.177277],
+                    // "desc":"较拥挤",
+                    "labelSizeWidth":150,
                     "iconWidth":150,
                     "iconHeight":50,
-                    "height": 5.177277,                // POI 点高程，单位米
-                    "detailUrl": popupUrl + "location1.html",  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 0,                  // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -45,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 120,               // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
+                    "descBgColor":"#ff9966",
+                    "lineColor":"#F03B71",
+                    "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/jingqu.png",
+                    // "sub_icon_url":"http://192.168.34.213:8888/XiXi/icon/sub_icon.png",
+                    "focusSet":{
+                        "focusY":-84, // pitch (-15,-90)
+                        "focusZ":0, // yaw
+                        "focusDistance":39440,
+                        "time":3
+                    }
                 },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.675462, 31.318861]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location2",            // POI ID
-                    "name": "苏州中心商场",           // POI 名称
-                    "desc": "较拥挤",
+                {
+                    "id":"location2",
+                    "name":"苏州中心商场",
+                    "url":"http://192.168.34.213:8888/XiXi/detail/detail2.html",
+                    "labelSizeWidth":280,
+                    "windowSizeWidth":500,
+                    "windowSizeHeight":400,
                     "iconWidth":120,
                     "iconHeight":120,
-                    "height": 53.930321,                // POI 点高程，单位米
-                    "detailUrl": popupUrl + "location2.html",  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 90,                  // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -21,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 123.5,          // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3                    // 定位飞行时间（可选属性）
+                    "focusSet":{
+                        "focusY":-21, // pitch (-15,-90)
+                        "focusZ":-157, // yaw
+                        "focusDistance":18893,
+                        "time":3
+                    },
+                    "location":[120.673454,31.31842,53.930321],
+                    "desc":"舒适",
+                    "descBgColor":"#66cc66",
+                    "lineColor":"#048A00",
+                    "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/canyin.png",
+                     "sub_icon_url":"http://192.168.34.213:8888/XiXi/icon/sub_icon.png",
                 },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.673454, 31.31842]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location3",            // POI ID
-                    "name": "中茵皇冠假日酒店",           // POI 名称
-                    "desc": "舒适",
-                    "height": 37.237129,                // POI 点高程，单位米
-                    "detailUrl": popupUrl + "location3.html",   // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 180,                  // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -29,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 623.5,          // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
+                {
+                    "id":"location3",
+                    "name":"中茵皇冠假日酒店",
+                    "desc":"较拥挤",
+                    "windowSizeWidth":100,
+                    "windowSizeHeight":100,
+                    "descBgColor":"#ff9966",
+                    "lineColor":"#ff9900",
+                    "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+                    "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+                    "location":[120.678711,31.324223,37.237129],
+                    "focusSet":{
+                        "focusY":-29, // pitch (-15,-90)
+                        "focusZ":-140, // yaw
+                        "focusDistance":9506,
+                        "time":3
+                    },
+                    "enableAutoFlyTo":false,
+                    "iconAngle":45
                 },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.678711, 31.324223]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location4",            // POI ID
-                    "name": "桃花岛",           // POI 名称
-                    "desc": "舒适",
-                    "height": 37.237129,                // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 270,                  // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -20,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 623.5,            // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
+                {
+                    "id":"location4",
+                    "name":"桃花岛",
+                    "desc":"较拥挤",
+                    "windowSizeWidth":100,
+                    "windowSizeHeight":100,
+                    "descBgColor":"#ff9966",
+                    "lineColor":"#ff9900",
+                    "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+                    "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+                    "location":[120.687958,31.321032,0],
+                    "focusSet":{
+                        "focusY":-20, // pitch (-15,-90)
+                        "focusZ":-133, // yaw
+                        "focusDistance":27397,
+                        "time":3
+                    },
                 },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.687958, 31.321032]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location5",            // POI ID
-                    "name": "文化艺术中心",           // POI 名称
-                    "desc": "舒适",
-                    "height": 25.56336,           // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 360,                  // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -17,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 623.5,             // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
+                {
+                    "id":"location5",
+                    "name":"文化艺术中心",
+                    "desc":"较拥挤",
+                    "windowSizeWidth":100,
+                    "windowSizeHeight":100,
+                    "descBgColor":"#ff9966",
+                    "lineColor":"#ff9900",
+                    "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+                    "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+                    "location":[120.697594,31.323679,25.56336],
+                    "focusSet":{
+                        "focusY":-17, // pitch (-15,-90)
+                        "focusZ":-133, // yaw
+                        "focusDistance":47027,
+                        "time":3
+                    }
                 },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.697594, 31.323679]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location6",            // POI ID
-                    "name": "月光码头",           // POI 名称
-                    "desc": "舒适",
-                    "height": 25.56336,           // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 90,                // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -28,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 623.5,            // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
+                {
+                    "id":"location6",
+                    "name":"月光码头",
+                    "desc":"较拥挤",
+                    "windowSizeWidth":100,
+                    "windowSizeHeight":100,
+                    "descBgColor":"#ff9966",
+                    "lineColor":"#ff9900",
+                    "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+                    "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+                    "location":[120.700699,31.321997,1.855887],
+                    "focusSet":{
+                        "focusY":-28, // pitch (-15,-90)
+                        "focusZ":-133, // yaw
+                        "focusDistance":28955,
+                        "time":3
+                    }
                 },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.700699, 31.321997]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location7",            // POI ID
-                    "name": "国际博览中心",           // POI 名称
-                    "desc": "舒适",
-                    "height": 22.911165,           // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 90,                // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -18,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 623.5,          // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
+                {
+                    "id":"location7",
+                    "name":"国际博览中心",
+                    "desc":"较拥挤",
+                    "windowSizeWidth":100,
+                    "windowSizeHeight":100,
+                    "descBgColor":"#ff9966",
+                    "lineColor":"#ff9900",
+                    "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+                    "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+                    "location":[120.702293,31.325665,22.911165],
+                    "focusSet":{
+                        "focusY":-18, // pitch (-15,-90)
+                        "focusZ":-133, // yaw
+                        "focusDistance":23797,
+                        "time":3
+                    }
                 },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.702293, 31.325665]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location8",            // POI ID
-                    "name": "国金中心",           // POI 名称
-                    "desc": "舒适",
-                    "height": 5.544312,           // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 90,                // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -30,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 223.5,               // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
+                {
+                    "id":"location8",
+                    "name":"国金中心",
+                    "desc":"较拥挤",
+                    "windowSizeWidth":100,
+                    "windowSizeHeight":100,
+                    "descBgColor":"#ff9966",
+                    "lineColor":"#ff9900",
+                    "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+                    "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+                    "location":[120.71273,31.323914,415.544312],
+                    "focusSet":{
+                        "focusY":-30, // pitch (-15,-90)
+                        "focusZ":-133, // yaw
+                        "focusDistance":23156,
+                        "time":3
+                    }
                 },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.71283, 31.323914]
+                {
+                    "id":"location9",
+                    "name":"奥林匹克体育中心",
+                    "desc":"较拥挤",
+                    "windowSizeWidth":100,
+                    "windowSizeHeight":100,
+                    "descBgColor":"#ff9966",
+                    "lineColor":"#ff9900",
+                    "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+                    "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+                    "location":[120.746452,31.306192,50.27029],
+                    "focusSet":{
+                        "focusY":5, // pitch (-15,-90)
+                        "focusZ":45, // yaw
+                        "focusDistance":20000,
+                        "time":3
+                    }
                 }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location9",            // POI ID
-                    "name": "奥林匹克体育中心",           // POI 名称
-                    "desc": "较拥挤",
-                    "height": 5.27029,           // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 90,                // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -22,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 416.802,               // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
-                },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.746452, 31.306192]
-                }
-            },
-        ]
-    }
+            ]
 
-    let options = {
-        "mainStyle": {                   // 不同类型POI 的样式
-            "property": "name",             // 用于区分类型的属性名
-            "style": [
-                {
-                    "value": "东方之门",     // 类型枚举值
-                    "color": "#F03B71",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "iconWidth":150,
-                    "iconHeight":50,
-                    "layout": {              // poi详情页面的宽高
-                        "width": 578,
-                        "height": 214
-                    }
-                }, {
-                    "value": "苏州中心商场",     // 类型枚举值
-                    "color": "#048A00",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/gouwu.png",  // 该类型POI 图标
-                    "labelWidth":300,
-                    "iconRotation":45,
-                    "iconWidth":120,
-                    "iconHeight":120,
-                    "layout": {              // poi详情页面的宽高
-                        "width": 440,
-                        "height": 150
-                    }
-                }, {
-                    "value": "中茵皇冠假日酒店",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/gouwu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 440,
-                        "height": 150
-                    }
-                }, {
-                    "value": "桃花岛",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }, {
-                    "value": "文化艺术中心",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }, {
-                    "value": "月光码头",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }, {
-                    "value": "国际博览中心",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }, {
-                    "value": "国金中心",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/gouwu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }, {
-                    "value": "奥林匹克体育中心",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }
-            ]
-        },
-        "tagStyle": {               // 标签样式
-            "property": "desc",   // 标签的属性名
-            "style": [              // 不同标签的样式
-                {
-                    value: "舒适",  // 标签枚举值
-                    color: "#66cc66" // 标签颜色
-                }, {
-                    value: "较拥挤",  // 标签枚举值
-                    color: "#ff9966" // 标签颜色
-                }, {
-                    value: "拥挤",  // 标签枚举值
-                    color: "#ff6666" // 标签颜色
-                }
-            ]
         }
-    };
-
-    mapmostUE.addPOIs("layer1", poiData, options);
-})
-
-// 隐藏POI
-$("#hidePOI").click(function () {
-    mapmostUE.setPOIsVisibility("layer1", false)
-})
+    })
+    // i++
+    // ue5("Layer", {
+    //     "module": "Layer",
+    //     "subModule": "POI",
+    //     "method": "addPOIs",
+    //     "data": {
+    //         "layerId":"Layer1" + i,
+    //         "poidata":[
+    //             {
+    //                 "id":"location1" + i,
+    //                 "name":"东方之门",
+    //                 // "url":"https://www.baidu.com",
+    //                 "location":[120.675362 + Math.random()/10,31.318861+ Math.random()/10,53.177277],
+    //                 // "desc":"较拥挤",
+    //                 "labelSizeWidth":150,
+    //                 "iconWidth":150,
+    //                 "iconHeight":50,
+    //                 "descBgColor":"#ff9966",
+    //                 "lineColor":"#F03B71",
+    //                 "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/jingqu.png",
+    //                 // "sub_icon_url":"http://192.168.34.213:8888/XiXi/icon/sub_icon.png",
+    //                 "focusSet":{
+    //                     "focusY":-84, // pitch (-15,-90)
+    //                     "focusZ":-140, // yaw
+    //                     "focusDistance":39440,
+    //                     "time":3
+    //                 }
+    //             },
+    //             {
+    //                 "id":"location2" + i,
+    //                 "name":"苏州中心商场",
+    //                 "url":"http://192.168.34.213:8888/XiXi/detail/detail2.html",
+    //                 "labelSizeWidth":280,
+    //                 "windowSizeWidth":500,
+    //                 "windowSizeHeight":400,
+    //                 "iconWidth":120,
+    //                 "iconHeight":120,
+    //                 "focusSet":{
+    //                     "focusY":-21, // pitch (-15,-90)
+    //                     "focusZ":-157, // yaw
+    //                     "focusDistance":18893,
+    //                     "time":3
+    //                 },
+    //                 "location":[120.673454+ Math.random()/10,31.31842+ Math.random()/10,53.930321],
+    //                 "desc":"舒适",
+    //                 "descBgColor":"#66cc66",
+    //                 "lineColor":"#048A00",
+    //                 "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/canyin.png",
+    //                 // "sub_icon_url":"http://192.168.34.213:8888/XiXi/icon/sub_icon.png",
+    //             },
+    //             {
+    //                 "id":"location3" + i,
+    //                 "name":"中茵皇冠假日酒店",
+    //                 "desc":"较拥挤",
+    //                 "windowSizeWidth":100,
+    //                 "windowSizeHeight":100,
+    //                 "descBgColor":"#ff9966",
+    //                 "lineColor":"#ff9900",
+    //                 "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+    //                 "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+    //                 "location":[120.678711+ Math.random()/10,31.324223+ Math.random()/10,37.237129],
+    //                 "focusSet":{
+    //                     "focusY":-29, // pitch (-15,-90)
+    //                     "focusZ":-148, // yaw
+    //                     "focusDistance":9506,
+    //                     "time":3
+    //                 },
+    //                 "enableAutoFlyTo":false,
+    //                 "iconAngle":45
+    //             },
+    //             {
+    //                 "id":"location4" + i,
+    //                 "name":"桃花岛",
+    //                 "desc":"较拥挤",
+    //                 "windowSizeWidth":100,
+    //                 "windowSizeHeight":100,
+    //                 "descBgColor":"#ff9966",
+    //                 "lineColor":"#ff9900",
+    //                 "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+    //                 "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+    //                 "location":[120.687958+ Math.random()/10,31.321032+ Math.random()/10,0],
+    //                 "focusSet":{
+    //                     "focusY":-20, // pitch (-15,-90)
+    //                     "focusZ":-133, // yaw
+    //                     "focusDistance":27397,
+    //                     "time":3
+    //                 },
+    //             },
+    //             {
+    //                 "id":"location5" + i,
+    //                 "name":"文化艺术中心",
+    //                 "desc":"较拥挤",
+    //                 "windowSizeWidth":100,
+    //                 "windowSizeHeight":100,
+    //                 "descBgColor":"#ff9966",
+    //                 "lineColor":"#ff9900",
+    //                 "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+    //                 "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+    //                 "location":[120.697594+ Math.random()/10,31.323679+ Math.random()/10,25.56336],
+    //                 "focusSet":{
+    //                     "focusY":-17, // pitch (-15,-90)
+    //                     "focusZ":-133, // yaw
+    //                     "focusDistance":47027,
+    //                     "time":3
+    //                 }
+    //             },
+    //             {
+    //                 "id":"location6" + i,
+    //                 "name":"月光码头",
+    //                 "desc":"较拥挤",
+    //                 "windowSizeWidth":100,
+    //                 "windowSizeHeight":100,
+    //                 "descBgColor":"#ff9966",
+    //                 "lineColor":"#ff9900",
+    //                 "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+    //                 "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+    //                 "location":[120.700699+ Math.random()/10,31.321997+ Math.random()/10,1.855887],
+    //                 "focusSet":{
+    //                     "focusY":-28, // pitch (-15,-90)
+    //                     "focusZ":-133, // yaw
+    //                     "focusDistance":28955,
+    //                     "time":3
+    //                 }
+    //             },
+    //             {
+    //                 "id":"location7" + i,
+    //                 "name":"国际博览中心",
+    //                 "desc":"较拥挤",
+    //                 "windowSizeWidth":100,
+    //                 "windowSizeHeight":100,
+    //                 "descBgColor":"#ff9966",
+    //                 "lineColor":"#ff9900",
+    //                 "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+    //                 "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+    //                 "location":[120.702293+ Math.random()/10,31.325665+ Math.random()/10,22.911165],
+    //                 "focusSet":{
+    //                     "focusY":-18, // pitch (-15,-90)
+    //                     "focusZ":-133, // yaw
+    //                     "focusDistance":23797,
+    //                     "time":3
+    //                 }
+    //             },
+    //             {
+    //                 "id":"location8" + i,
+    //                 "name":"国金中心",
+    //                 "desc":"较拥挤",
+    //                 "windowSizeWidth":100,
+    //                 "windowSizeHeight":100,
+    //                 "descBgColor":"#ff9966",
+    //                 "lineColor":"#ff9900",
+    //                 "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+    //                 "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+    //                 "location":[120.71273+ Math.random()/10,31.323914+ Math.random()/10,415.544312],
+    //                 "focusSet":{
+    //                     "focusY":-30, // pitch (-15,-90)
+    //                     "focusZ":-133, // yaw
+    //                     "focusDistance":23156,
+    //                     "time":3
+    //                 }
+    //             },
+    //             {
+    //                 "id":"location9" + i,
+    //                 "name":"奥林匹克体育中心",
+    //                 "desc":"较拥挤",
+    //                 "windowSizeWidth":100,
+    //                 "windowSizeHeight":100,
+    //                 "descBgColor":"#ff9966",
+    //                 "lineColor":"#ff9900",
+    //                 "url":"http://192.168.34.213:8888/XiXi/icon/detail2.html",
+    //                 "iconUrl":"http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+    //                 "location":[120.746452+ Math.random()/10,31.306192+ Math.random()/10,50.27029],
+    //                 "focusSet":{
+    //                     "focusY":5, // pitch (-15,-90)
+    //                     "focusZ":45, // yaw
+    //                     "focusDistance":20000,
+    //                     "time":3
+    //                 }
+    //             }
+    //         ]
+    //
+    //     }
+    // })
+});
 
 // 显示POI
 $("#showPOI").click(function () {
-    mapmostUE.setPOIsVisibility("layer1", true)
-})
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "setPOIsVisibility",
+        "data": {
+            "layerId": "Layer1",
+            "isVisible": true
+        }
+    })
+});
 
-// 移除POI
+// 隐藏POI
+$("#hidePOI").click(function () {
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "setPOIsVisibility",
+        "data": {
+            "layerId": "Layer1",
+            "isVisible": false
+        }
+    })
+});
+
+// 删除POI
 $("#removePOI").click(function () {
-    mapmostUE.removePOIs("layer1")
-})
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "removePOIs",
+        "data": {
+            "layerId":"Layer1"
+        }
+    })
+});
 
 // 更新POI
-$("#updatePOIPosition").click(function () {
-    mapmostUE.updatePOIs("layer1",
-        [{
-            id: "location1",             // POI ID （必须要有的属性，值唯一且不为NULL）
-            name: "金鸡湖玲珑岛",           // POI 名称 （可选属性，值可为NULL）
-            location: [120.675362, 31.318881, 100.177277],
-            color: "#ff9900",            // 该类型POI主题色，表现为引线颜色（可选属性）
-            iconImage: "http://192.168.34.213:8888/SIPSD/icon/gouwu.png",         // 该类型POI 图标（可选属性）
-        }, {
-            id: "location2",             // POI ID （必须要有的属性，值唯一且不为NULL）
-            name: "春晓别墅",           // POI 名称 （可选属性，值可为NULL）
-            location: [120.673454, 31.31862, 13.930321],
-            color: "#ff9900",            // 该类型POI主题色，表现为引线颜色（可选属性）
-            labelWidth: 300,       // label的宽度 （可选属性）
-            tag: "拥挤",                  // POI 标签（可选属性）
-            tagColor: "#ff9900",          // POI 标签底色（可选属性）
-            iconImage: "http://192.168.34.213:8888/SIPSD/icon/gouwu.png",         // 该类型POI 图标（可选属性）
-        }]
-    );
-})
+$("#updatePOI").click(function () {
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "updatePOIs",
+        "data": {
+            "layerId": "Layer1",
+            "poiData": [
+                {
+                    "id": "location1",
+                    "location": [120.675362,31.318881,100.177277],
+                    "desc": "舒适",
+                    "descBgColor": "#66cc66",
+                    "name": "金鸡湖玲珑岛",
+                    "lineColor": "#ff9900",
+                    // "labelSizeWidth":500,
+                    "iconUrl": "http://192.168.34.213:8888/SIPSD/icon/gouwu.png",
+                    // "subIconUrl":"http://192.168.34.213:8888/XiXi/icon/pin.png"
+                },
+                {
+                    "id": "location2",
+                    "location": [120.673454,31.31862,13.930321],
+                    "desc": "拥挤",
+                    "descBgColor": "#ff9900",
+                    "name": "春晓别墅",
+                    "labelSizeWidth": 300,
+                    "lineColor": "#ff9900",
+                    "iconUrl": "http://192.168.34.213:8888/SIPSD/icon/gouwu.png"
+                    // "subIconUrl":"http://192.168.34.213:8888/XiXi/icon/user.png"
+                }
+            ]
+        }
+    })
+});
 
-// POI是否存在
+// 判断是否存在某一POI图层
 $("#hasLayer").click(function () {
-    mapmostUE.hasPOIs("layer1", function (res) {
-
-
-        // alert(res.hasPOIs)
-        if (res.hasPOIs === 'true'){
-            var notyf = new Notyf({
-                position:{
-                    x:'center',
-                    y:'center'
-                }
-            });
-            notyf.success('' + res.hasPOIs)
-        } else {
-            var notyf = new Notyf({
-                position:{
-                    x:'center',
-                    y:'center'
-                }
-            });
-            notyf.error('' + res.hasPOIs)
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "hasLayer",
+        "data": {
+            "layerId": "Layer1"
         }
-    })  // 返回布尔值
-})
+    },function (response) {
+        console.log(response)
+    })
+});
 
+// 显示POI详情
+$("#showPOIContent").click(function () {
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "showPOIContent",
+        "data": {
+            "layerId": "Layer1",
+            "poiId": "location2"
+        }
+    })
+});
 
+// 隐藏POI详情
+$("#hidePOIContent").click(function () {
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "hidePOIContent",
+        "data": {
+            "layerId": "Layer1",
+            "poiId": "location2"
+        }
+    })
+});
 
-// 显示POI详情并定位
-$("#showPOIPopup").click(function () {
-    mapmostUE.showPOIContent("layer1", "location1");
-})
-
-// 隐藏POI的详情弹窗
-$("#hidePOIPopup").click(function () {
-    mapmostUE.hidePOIContent("layer1", "location1");
-})
-
-
-// // 更新POI样式及内容
-// $("#updatePOIContent").click(function () {
-//     mapmostUE.updatePOIContent("layer1", [{
-//         "id": "location1",             // POI ID （必须要有的属性，值唯一且不为NULL）
-//         "name": "东方之门",            // POI 名称 （可选属性，值可为NULL）
-//         "color": "#F03B71",            // 该类型POI主题色，表现为引线颜色（可选属性）
-//         "tag": "舒适",                  // POI 标签（可选属性）
-//         "tagColor": "#66cc66",          // POI 标签底色（可选属性）
-//         "iconImage": "http://192.168.34.213:8888/SIPSD/icon/canyin.png",         // 该类型POI 图标（可选属性）
-//     }]);
-// })
-
-// 高亮POI  TODO tommorow
+// 高亮POI
 $("#highlightPOI").click(function () {
-    mapmostUE.highlightPOI("layer1", "location1", {
-        color:"#013dfc"
-    });
-})
-
-// 清除POI高亮
-$("#unhighlightPOI").click(function () {
-    mapmostUE.unhighlightPOI("layer1", "location1");
-})
-
-// 添加POI点击事件监听
-$("#setOnPOIClickListener").click(function () {
-    mapmostUE.setOnPOIClickListener(function (response) {
-        // 图层ID 和POI ID
-        let {layerId, poiId} = response;
-        // alert(layerId+"中POI" + poiId + "被点击")
-        var notyf = new Notyf({
-            position:{
-                x:'center',
-                y:'center'
-            }
-        });
-        notyf.success(layerId+"中POI" + poiId + "被点击")
-        if (layerId === 'layer1' && poiId === 'location2'){
-            mapmostUE.flyTo({
-                "location":[120.66492662820784, 31.319807456550862, 295.591761310642],
-                "rotation":[0, -17.07972526550293, 13.139276504516602],
-                "time":2
-            });
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "highlightPOI",
+        "data": {
+            "layerId": "Layer1",
+            "poiId": "location2",
+            "color": "#51b97f" // 不传该属性默认蓝色
         }
-    });
-})
+    })
+});
 
-// 移除POI点击事件监听
+// 取消高亮POI
+$("#unhighlight").click(function () {
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "unhighlight",
+        "data": {
+            "layerId": "Layer1",
+            "poiId": "location2"
+        }
+    })
+});
+
+// 设置POI点击事件监听
+$("#setOnPOIClickListener").click(function () {
+    // POI点击事件监听
+    ue.interface.onPOIClickListener = function (val) {
+        console.log(val)
+    };
+});
+
+// 删除POI点击事件监听
 $("#removeOnPOIClickListener").click(function () {
-    mapmostUE.removeOnPOIClickListener();
-})
+    // POI点击事件监听
+    ue.interface.onPOIClickListener = function (val) {
 
+    };
+});
 
 // 设置POI展开收缩监听
 $("#setOnPOIExpandCollapseListener").click(function () {
-    mapmostUE.setOnPOIExpandCollapseListener(function (response) {
+    // POI展开收缩监听
+    ue.interface.onPOIExpandCollapseListener = function (val) {
+        console.log(val)
+    };
+});
 
-        // 图层ID 和POI ID
-        let {layerId, poiId, newState} = response;
-        // alert(layerId+"中POI" + poiId + newState)
-        var notyf = new Notyf({
-            position:{
-                x:'center',
-                y:'center'
-            }
-        });
-        notyf.success(layerId+"中POI" + poiId + newState)
-    });
-})
-
-// 移除POI展开收缩监听
+// 删除删除POI展开收缩监听
 $("#removeOnPOIExpandCollapseListener").click(function () {
-    mapmostUE.removeOnPOIExpandCollapseListener();
-})
+    // POI展开收缩监听
+    ue.interface.onPOIExpandCollapseListener = function (val) {
+
+    };
+});
 
 // 改变POI信息展示的临界距离
-$("#setDistanceOfPOIStatusChange").click(function () {
-    mapmostUE.setDistanceOfPOIStatusChange({distanceShowAll:50, distanceShowLineOnly:200});
-})
-
-// 打开POI渐隐效果
-$("#openPOIFadeOut").click(function () {
-    mapmostUE.setPOIFadeOutEffect(true);
-})
-
-// 关闭POI渐隐效果
-$("#closePOIFadeOut").click(function () {
-    mapmostUE.setPOIFadeOutEffect(false);
-})
-
-// 设置POI渐隐透明度距离
-$("#setDistanceOfPOIFadeOutEffect").click(function () {
-    let options = {
-        "distance": [5000, 25000, 50000],
-        "opacity":[1, 0.5, 0.1]
-    }
-    mapmostUE.setDistanceOfPOIFadeOutEffect(options)
+$("#ChangePOIInfoCriticalDistance").click(function () {
+    ue5("Layer", {
+        "module": "Layer",
+        "subModule": "POI",
+        "method": "setDistanceOfPOIStatusChange",
+        "data": {
+            "distanceShowAll": 5000, // 单位厘米，小于此距离展示POI的全部信息，包括杆子，Label，信息框等
+            "distanceShowLineOnly": 10000 // 单位厘米，小于此距离展示POI的杆子和图标，Label不显示
+        }
+    })
 });
 
-// 开启POI避让
-$("#openPOIAvoidance").click(function () {
-    mapmostUE.setPOIAvoidance(true)
-});
+ // 设置POI渐隐透明度距离
+ $("#setDistanceOfPOIFadeOutEffect").click(function () {
+     ue5("Layer", {
+         "module": "Layer",
+         "subModule": "POI",
+         "method": "setDistanceOfPOIFadeOutEffect",
+         "data": {
+             "distance": [5000, 25000, 50000],
+             "opacity":[1, 0.5, 0.1]
+         }
+     })
+ });
 
-// 关闭POI避让
-$("#closePOIAvoidance").click(function () {
-    mapmostUE.setPOIAvoidance(false)
-});
+ // 开启POI避让
+ $("#openPOIAvoidance").click(function () {
+     ue5("Layer", {
+         "module": "Layer",
+         "subModule": "POI",
+         "method": "setPOIAvoidance",
+         "data": {
+             "canAvoid":true
+         }
+     })
+ });
+
+ // 关闭POI避让
+ $("#closePOIAvoidance").click(function () {
+     ue5("Layer", {
+         "module": "Layer",
+         "subModule": "POI",
+         "method": "setPOIAvoidance",
+         "data": {
+             "canAvoid":false
+         }
+     })
+ });
