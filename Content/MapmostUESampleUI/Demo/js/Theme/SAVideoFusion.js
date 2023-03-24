@@ -6,7 +6,7 @@ $("#addSingleVideoFusion").click(function (){
         "rotation": [0,-28.236055,-13.014364],
         "time":2
     });
-
+    
     mapmostUE.addVideoFusion({
         cameraPosition: [120.739105, 31.305603,  61.201748],
         fov: 45.643803,
