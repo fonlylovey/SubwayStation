@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="echarts.js"></script>
+  </head>
+  <body>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" style="width: 990px;height:620px; background-color: white"></div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      // var myChart = echarts.init(document.getElementById('main'),"dark");
+      var myChart = echarts.init(document.getElementById('main'));
+      
+      var option;
+      
+      var params = getUrlParam('data');
+      var data = JSON.parse(unescape(params));
+      // 管段起终点高程
+      let elev = [];
+      // 管段起终点地面高程
+      let surfaceElev = [];
+      // 管段长度
+      let pipeLength = [];
+      // 展示起点终点垂直辅助线
+      let dashedLines = [];
+      
+      // 起点横坐标
+      let startPointXAxis = 5;
+      // 计算终点横坐标
+      let endPointXAxis = startPointXAxis + Math.sqrt((data.pipeLength * data.pipeLength) - (data.startElev - data.endElev) * (data.startElev - data.endElev));
+
+      // 计算X坐标轴的最小值以显示表格最左列
+      let minXAxis =  startPointXAxis - (startPointXAxis + endPointXAxis)/2
+      
+      let maxXAxis = endPointXAxis - minXAxis
+
+      // 数据标记点
+      let markPoints = [
+        { xAxis:(minXAxis + startPointXAxis)/2,yAxis:-6.5,label:{formatter:'地面高程', fontSize:'12'}},
+        { xAxis:(minXAxis + startPointXAxis)/2,yAxis:-7.5,label:{formatter:'管线高程', fontSize:'12'}},
+        { xAxis:(minXAxis + startPointXAxis)/2,yAxis:-8.5,label:{formatter:'埋深', fontSize:'12'}},
+        { xAxis:(minXAxis + startPointXAxis)/2,yAxis:-9.5,label:{formatter:'管段长度', fontSize:'12'}},
+        { xAxis:startPointXAxis,yAxis:-6.5,label:{formatter: '' + data.startSurfaceElev,rotate:90,offset:[0,-2], fontSize:'12'}},
+        { xAxis:startPointXAxis,yAxis:-7.5,label:{formatter: '' + data.startElev,rotate:90,offset:[0,-2], fontSize:'12'}},
+        { xAxis:startPointXAxis,yAxis:-8.5,label:{formatter: '' + data.startDepth,rotate:90,offset:[0,-2], fontSize:'12'}},
+        { xAxis:endPointXAxis,yAxis:-6.5,label:{formatter: '' + data.endSurfaceElev,rotate:90,offset:[0,-2], fontSize:'12'}},
+        { xAxis:endPointXAxis,yAxis:-7.5,label:{formatter: '' + data.endElev,rotate:90,offset:[0,-2], fontSize:'12'}},
+        { xAxis:endPointXAxis,yAxis:-8.5,label:{formatter: '' + data.endDepth,rotate:90,offset:[0,-2], fontSize:'12'}},
+        { xAxis:(startPointXAxis + endPointXAxis)/2,yAxis:-9.5,label:{formatter: '' + data.pipeLength, fontSize:'12'}}
+      ];
+      
+          
+      // 管段起点高程
+      elev.push({
+        value: [startPointXAxis, data.startElev],
+        symbol: getPipeShape(data.pipeShape), // 根据管线形状来区分
+        itemStyle:{
+          color:getPipeColor(data.pipeType) // 根据管线类型区分颜色
+        },
+        label: {
+          show: true,
+          fontSize:'12',
+          offset:[0,30],
+          formatter:data.startElev
+        },
+        tooltip:{
+          formatter:'起点高程：' + data.startElev + '<br>'
+                      + '起点埋深：' + data.startDepth + '<br>'
+                      + '起点地面高程：' + data.startSurfaceElev + '<br>'
+                      + '管段长度：' + data.pipeLength + '<br>'
+                      + '管线类型：' + data.pipeType
+        }
+      })
+
+      // 管段终点高程
+      elev.push({
+        value: [endPointXAxis, data.endElev],
+        symbol: getPipeShape(data.pipeShape), // 根据管线形状来区分
+        itemStyle:{
+          color:getPipeColor(data.pipeType) // 根据管线类型区分颜色
+        },
+        label: {
+          show: true,
+          fontSize:'12',
+          offset:[0,30],
+          formatter:data.endElev
+        },
+        tooltip:{
+          formatter:'终点高程：' + data.endElev + '<br>'
+                  + '终点埋深：' + data.endDepth + '<br>'
+                  + '终点地面高程：' + data.endSurfaceElev + '<br>'
+                  + '管段长度：' + data.pipeLength + '<br>'
+                  + '管线类型：' + data.pipeType
+        }
+      })
+
+      // 用于显示管段长度
+      let distanceLine = []
+      let start = {}
+      start.name = data.pipeLength
+      start.symbol ='none'
+      start.label ={
+        show: true,
+        position:'middle'
+      }
+      start.xAxis = startPointXAxis
+      start.yAxis = data.startElev
+      let end = {}
+      end.symbol ='none'
+      end.xAxis = endPointXAxis
+      end.yAxis = data.endElev
+      distanceLine.push(start)
+      distanceLine.push(end)
+
+      pipeLength.push(distanceLine)
+
+      
+          
+      // 管段起终点地面高程
+      surfaceElev.push([startPointXAxis,data.startSurfaceElev])
+      surfaceElev.push([endPointXAxis,data.endSurfaceElev])
+      
+      // 起点终点作两条垂直辅助线
+      dashedLines.push([{
+        xAxis:startPointXAxis,
+        yAxis:-10
+      },{
+        xAxis:startPointXAxis,
+        yAxis:data.startElev
+      }])
+      dashedLines.push([{
+        xAxis:endPointXAxis,
+        yAxis:-10
+      },{
+        xAxis:endPointXAxis,
+        yAxis:data.endElev
+      }])
+          
+
+      option = {
+        title:{
+          text:'地下管线纵截面示意图',
+          x:'center'
+        },
+        xAxis: {
+          type: 'value',
+          show: false,
+          min:minXAxis,
+          max:maxXAxis,
+          name: '距离',
+          splitLine: {
+            lineStyle: {
+              type: 'dashed'
+            }
+          }
+        },
+        yAxis: {
+          type: 'value',
+          show: false,
+          min: -10,
+          name: '高程',
+          splitLine: {
+            lineStyle: {
+              type: 'dashed'
+            }
+          }
+        },
+        tooltip: {
+          // axisPointer: {
+          //   show: true,
+          //   type: 'cross',
+          //   lineStyle: {
+          //     type: 'dashed',
+          //     width: 1
+          //   }
+          // }
+        },
+        toolbox: {
+          feature: {
+            dataZoom: {},
+            brush: {
+              type: []
+            }
+          }
+        },
+        series: [
+          {
+            name:'管段高程',
+            symbolSize: 10,
+            data: elev,
+            type: 'line',
+            zlevel: 2,
+            lineStyle:{
+              color:getPipeColor(data.pipeType)
+            },
+            markPoint: {
+              symbol:'rect',
+              symbolSize:0,
+              label:{
+                show:true,
+                color:'#000000',
+                fontSize:5
+              },
+              tooltip:{
+                show: false,
+                trigger:'none'
+              },
+              data: markPoints
+            },
+            markArea: {
+              silent: true,
+              itemStyle: {
+                color: 'transparent',
+                borderWidth: 0.5,
+                borderColor:'#000000',
+                borderType: 'solid'
+              },
+              data: [
+                [
+                  {
+                    xAxis: minXAxis,
+                    yAxis: -10
+                  },
+                  {
+                    xAxis: maxXAxis,
+                    yAxis: -9
+                  }
+                ],
+                [
+                  {
+                    xAxis: minXAxis,
+                    yAxis: -9
+                  },
+                  {
+                    xAxis: maxXAxis,
+                    yAxis: -8
+                  }
+                ],
+                [
+                  {
+                    xAxis: minXAxis,
+                    yAxis: -8
+                  },
+                  {
+                    xAxis: maxXAxis,
+                    yAxis: -7
+                  }
+                ],
+                [
+                  {
+                    xAxis: minXAxis,
+                    yAxis: -7
+                  },
+                  {
+                    xAxis: maxXAxis,
+                    yAxis: -6
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            name:'地面高程',
+            symbol:'circle',
+            itemStyle:{
+              color:'#cfcece'
+            },
+            lineStyle:{
+              color:'#e3e3e3',
+              type:'dashed'
+            },
+            label: {
+              show: true,
+              fontSize:'12'
+            },
+            symbolSize: 5,
+            data: surfaceElev,
+            type: 'line',
+            zlevel: 0,
+            triggerLineEvent: false,
+            // areaStyle:{
+            //   color:'rgb(169, 140, 61)',
+            //   origin:'start'
+            // }
+          },
+          {
+            name:'管段长度',
+            type:'line',
+            data:[],
+            markLine: {
+              lineStyle: {
+                type: 'dashed'
+              },
+              data: pipeLength
+            },
+            zlevel: 1
+          },
+          {
+            name:'辅助线',
+            type:'line',
+            data:[],
+            markLine: {
+              symbol:'none',
+              tooltip:{
+                show: false,
+                trigger:'none'
+              },
+              lineStyle: {
+                type: 'dashed',
+                color:'#000000',
+                width: 0.5
+              },
+              data: dashedLines
+            },
+            zlevel: 0
+          }
+        ]
+      };
+      
+      myChart.setOption(option);
+      
+      function getUrlParam(name) {
+          var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+          var r = window.location.search.substr(1).match(reg); //匹配目标参数
+          if (r != null) return unescape(r[2]);
+          return null; //返回参数值
+      }
+      
+      function getPipeShape(shape){
+        return shape === 'box' ? 'rect' : 'circle'
+      }
+      
+      function getPipeColor(type){
+        var color
+        switch (type){
+          case 'dq':
+            color = '#000000'
+            break
+          case 'ws':
+            color = '#4c3926'
+            break
+          case 'ys':
+            color = '#4c3926'
+            break
+          case 'zq':
+            color = '#ff8000'
+            break
+          case 'rq':
+            color = '#ff00ff'
+            break
+          case 'gd':
+            color = '#ff0000'
+            break
+          case 'ld':
+            color = '#ff0000'
+            break
+          case 'js':
+            color = '#00ffff'
+            break
+          case 'ds':
+            color = '#00ff00'
+            break
+          case 'dx':
+            color = '#00ff00'
+            break
+        }
+        return color
+      }
+      
+    </script>
+  </body>
+</html>

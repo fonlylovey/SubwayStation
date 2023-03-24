@@ -1,0 +1,513 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="echarts.js"></script>
+  </head>
+  <body>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" style="width: 990px;height:620px; background-color: white"></div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      // var myChart = echarts.init(document.getElementById('main'),"dark");
+      var myChart = echarts.init(document.getElementById('main'));
+
+      var locationParams = getUrlParam('data');
+      var locationData = JSON.parse(unescape(locationParams));
+
+      let url = "http://192.168.34.213:9000/SIPPipe/SIPPipe/pipelineAnls/getCrossSection";
+      fetch(url,{
+        method:'post',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          "start":{
+            "x":locationData.startPoint[0],
+            "y":locationData.startPoint[1]
+          },
+          "end":{
+            "x":locationData.endPoint[0],
+            "y":locationData.endPoint[1]
+          },
+          // type不传的话返回全部
+          "typeList":[
+
+          ]
+        })
+      }).then(res => res.json()).then(response => {
+        console.log(JSON.stringify(response.data))
+
+        var option;
+
+        // var params = getUrlParam('data');
+        // var data = JSON.parse(response.data);
+        var data = response.data;
+        // 交点高程
+        let intersectElev = [];
+        // 展示埋深的辅助线
+        let intersectDepth = [];
+        // 交点地面高程
+        let intersectSurfaceElev = [];
+        // 用于显示交点之间的距离
+        // let pointsDistance = [];
+
+        // 计算坐标轴的最小值
+        let minXAxis =  0 - (data[data.length - 1].distanceOrigin / data.length)
+
+        // 数据标记点
+        let markPoints = [
+          { xAxis:minXAxis/2,yAxis:-5.5,label:{formatter:'地面高程', fontSize:'12'}},
+          { xAxis:minXAxis/2,yAxis:-6.5,label:{formatter:'管线高程', fontSize:'12'}},
+          { xAxis:minXAxis/2,yAxis:-7.5,label:{formatter:'间距', fontSize:'12'}},
+          { xAxis:minXAxis/2,yAxis:-8.5,label:{formatter:'规格', fontSize:'12'}},
+          { xAxis:minXAxis/2,yAxis:-9.5,label:{formatter:'埋深', fontSize:'12'}}
+        ];
+
+
+        var distance = 0;
+
+        for (var i=0; i < data.length; i++){
+
+
+          if (i === 0){
+
+            // 交点高程
+            // intersectElev.push([0, data[0].intersectElev])
+            intersectElev.push({
+              value: [0, data[0].intersectElev],
+              symbol: getPipeShapeSymbol(data[0].pipeShape), // 根据管线形状来区分
+              symbolSize: getPipeSymbolSize(data[0].pipeShape, data[0].size), // 根据管线规格
+              itemStyle:{
+                color:getPipeColor(data[0].pipeType) // 根据管线类型区分颜色
+              },
+              label: {
+                show: true,
+                fontSize:'12',
+                offset:[0,15],
+                formatter:data[0].intersectElev
+              },
+              tooltip:{
+                formatter:'管线类型：' + data[0].pipeType + '<br>'
+                        + '管线形状：' + getPipeShapeDesc(data[0].pipeShape) + '<br>'
+                        + '规格：' + getPipeSizeDesc(data[0].pipeShape, data[0].size) + '<br>'
+                        + '交点高程：' + data[0].intersectElev + '<br>'
+                        + '交点地面高程：' + data[0].intersectSurfaceElev + '<br>'
+                        + '埋深：' + data[0].intersectDepth + '<br>'
+                        + '至下一交点距离：' + data[0].distance
+              }
+            })
+
+            // 标记点
+            markPoints.push({ xAxis:0,yAxis:-5.5,label:{formatter:''+data[0].intersectSurfaceElev,rotate:90,offset:[0,-2]}});
+            markPoints.push({ xAxis:0,yAxis:-6.5,label:{formatter:''+data[0].intersectElev,rotate:90,offset:[0,-2]}});
+            markPoints.push({ xAxis:(0 + data[0].distance)/2,yAxis:-7.5,label:{formatter:''+data[0].distance}});
+            markPoints.push({ xAxis:0,yAxis:-8.5,label:{formatter:''+getPipeSizeDesc(data[i].pipeShape, data[i].size)}});
+            markPoints.push({ xAxis:0,yAxis:-9.5,label:{formatter:''+data[0].intersectDepth,rotate:90,offset:[0,-2]}});
+
+            // 交点地面高程
+            intersectSurfaceElev.push([0,data[i].intersectSurfaceElev])
+
+            // 用于显示交点之间的距离
+            // let distanceLine = []
+            // let start = {}
+            // start.name = data[0].distance
+            // start.symbol ='circle'
+            // start.symbolSize = 3
+            // start.label ={
+            //   show: false
+            // }
+            // start.xAxis = 0
+            // start.yAxis = 0
+            // let end = {}
+            // end.symbol ='circle'
+            // end.symbolSize = 3
+            // end.xAxis = data[0].distance
+            // end.yAxis = 0
+            // distanceLine.push(start)
+            // distanceLine.push(end)
+            //
+            // pointsDistance.push(distanceLine)
+
+            // 用于显示埋深
+            let depthLine = []
+            let depthstart = {}
+            depthstart.name = data[0].intersectDepth
+            depthstart.symbol ='none'
+            depthstart.label ={
+              show: false
+            }
+            depthstart.xAxis = 0
+            depthstart.yAxis = -10
+            let depthend = {}
+            depthend.symbol ='none'
+            depthend.xAxis = 0
+            depthend.yAxis = data[0].intersectElev
+            depthLine.push(depthstart)
+            depthLine.push(depthend)
+
+            intersectDepth.push(depthLine)
+
+          } else {
+
+            distance += data[i-1].distance
+            console.log('当前x坐标：' + distance)
+            console.log('下一交点x坐标：' + (distance + data[i].distance))
+            console.log('间距显示距离：' + (distance + distance + data[i].distance)/2)
+
+            // 交点高程
+            // intersectElev.push([distance,data[i].intersectElev])
+            intersectElev.push({
+              value: [distance, data[i].intersectElev],
+              symbol: getPipeShapeSymbol(data[i].pipeShape), // 根据管线形状来区分
+              symbolSize: getPipeSymbolSize(data[i].pipeShape, data[i].size), // 根据管线规格
+              itemStyle:{
+                color:getPipeColor(data[i].pipeType) // 根据管线类型区分颜色
+              },
+              label: {
+                show: true,
+                fontSize:'12',
+                offset:[0,15],
+                formatter:data[i].intersectElev
+              },
+              tooltip:{
+                formatter:'管线类型：' + data[i].pipeType + '<br>'
+                        + '管线形状：' + getPipeShapeDesc(data[i].pipeShape) + '<br>'
+                        + '规格：' + getPipeSizeDesc(data[i].pipeShape, data[i].size) + '<br>'
+                        + '交点高程：' + data[i].intersectElev + '<br>'
+                        + '交点地面高程：' + data[i].intersectSurfaceElev + '<br>'
+                        + '埋深：' + data[i].intersectDepth + '<br>'
+                        + '至下一交点距离：' + data[i].distance
+              }
+            })
+
+            // 标记点
+            markPoints.push({ xAxis:distance,yAxis:-5.5,label:{formatter:''+data[i].intersectSurfaceElev,rotate:90,offset:[0,-2]}});
+            markPoints.push({ xAxis:distance,yAxis:-6.5,label:{formatter:''+data[i].intersectElev,rotate:90,offset:[0,-2]}});
+            markPoints.push({ xAxis:(distance + distance + data[i].distance)/2,yAxis:-7.5,label:{formatter:''+data[i].distance}});
+            markPoints.push({ xAxis:distance,yAxis:-8.5,label:{formatter:''+getPipeSizeDesc(data[i].pipeShape, data[i].size)}});
+            markPoints.push({ xAxis:distance,yAxis:-9.5,label:{formatter:''+data[i].intersectDepth,rotate:90,offset:[0,-2]}});
+
+            // 交点地面高程
+            intersectSurfaceElev.push([distance,data[i].intersectSurfaceElev])
+
+            // 用于显示交点之间的距离
+            // let distanceLine = []
+            // let start = {}
+            // start.name = data[i].distance
+            // start.symbol ='circle'
+            // start.symbolSize = 3
+            // start.label ={
+            //   show: false
+            // }
+            // start.xAxis = distance
+            // start.yAxis = 0
+            // let end = {}
+            // end.symbol ='circle'
+            // end.symbolSize = 3
+            // end.xAxis = distance + data[i].distance
+            // end.yAxis = 0
+            // distanceLine.push(start)
+            // distanceLine.push(end)
+            //
+            // pointsDistance.push(distanceLine)
+
+            // 用于显示埋深
+            let depthLine = []
+            let depthstart = {}
+            depthstart.name = data[i].intersectDepth
+            depthstart.symbol ='none'
+            depthstart.label ={
+              show: false
+            }
+            depthstart.xAxis = distance
+            depthstart.yAxis = -10
+            let depthend = {}
+            depthend.symbol ='none'
+            depthend.xAxis = distance
+            depthend.yAxis = data[i].intersectElev
+            depthLine.push(depthstart)
+            depthLine.push(depthend)
+
+            intersectDepth.push(depthLine)
+
+          }
+
+        }
+
+        option = {
+          title:{
+            text:'地下管线横截面示意图',
+            x:'center'
+          },
+          // legend:{
+          //   orient: 'horizontal',
+          //   top: 'bottom'
+          // },
+          xAxis: {
+            type: 'value',
+            show: false,
+            min:minXAxis,
+            name: '距离',
+            splitLine: {
+              lineStyle: {
+                type: 'dashed'
+              }
+            }
+          },
+          yAxis: {
+            type: 'value',
+            show: false,
+            name: '高程',
+            min:-10,
+            splitLine: {
+              lineStyle: {
+                type: 'dashed'
+              }
+            }
+          },
+          tooltip: {
+            // axisPointer: {
+            //   show: true,
+            //   type: 'cross',
+            //   lineStyle: {
+            //     type: 'dashed',
+            //     width: 1
+            //   }
+            // }
+          },
+          toolbox: {
+            feature: {
+              dataZoom: {},
+              brush: {
+                type: []
+              }
+            }
+          },
+          series: [
+            {
+              name:'交点高程',
+              // symbol:'rect',
+              symbolSize: 10,
+              data: intersectElev,
+              type: 'scatter',
+              zlevel: 2,
+              markPoint: {
+                symbol:'rect',
+                symbolSize:0,
+                label:{
+                  show:true,
+                  color:'#000000',
+                  fontSize:12
+                },
+                tooltip:{
+                  show: false,
+                  trigger:'none'
+                },
+                data: markPoints
+              },
+              markArea: {
+                silent: true,
+                itemStyle: {
+                  color: 'transparent',
+                  borderWidth: 0.5,
+                  borderColor:'#000000',
+                  borderType: 'solid'
+                },
+                data: [
+                  [
+                    {
+                      xAxis: minXAxis,
+                      yAxis: -10
+                    },
+                    {
+                      xAxis: 'max',
+                      yAxis: -9
+                    }
+                  ],
+                  [
+                    {
+                      xAxis: minXAxis,
+                      yAxis: -9
+                    },
+                    {
+                      xAxis: 'max',
+                      yAxis: -8
+                    }
+                  ],
+                  [
+                    {
+                      xAxis: minXAxis,
+                      yAxis: -8
+                    },
+                    {
+                      xAxis: 'max',
+                      yAxis: -7
+                    }
+                  ],
+                  [
+                    {
+                      xAxis: minXAxis,
+                      yAxis: -7
+                    },
+                    {
+                      xAxis: 'max',
+                      yAxis: -6
+                    }
+                  ],
+                  [
+                    {
+                      xAxis: minXAxis,
+                      yAxis: -6
+                    },
+                    {
+                      xAxis: 'max',
+                      yAxis: -5
+                    }
+                  ]
+                ]
+              }
+            },
+            {
+              name:'交点地面高程',
+              symbol:'circle',
+              itemStyle:{
+                color:'#cfcece'
+              },
+              lineStyle:{
+                color:'#e3e3e3',
+                type:'dashed'
+              },
+              label: {
+                show: true,
+                fontSize:'12'
+              },
+              symbolSize: 1,
+              data: intersectSurfaceElev,
+              type: 'line',
+              zlevel: 1,
+              triggerLineEvent: false,
+              // areaStyle:{
+              //   color:'rgb(169, 140, 61)',
+              //   origin:'start'
+              // }
+            },
+            // {
+            //   name:'交点间距离',
+            //   type:'line',
+            //   data:[],
+            //   markLine: {
+            //     lineStyle: {
+            //       type: 'dashed'
+            //     },
+            //     data: pointsDistance
+            //   },
+            //   zlevel: 2
+            // },
+            {
+              name:'埋深',
+              type:'line',
+              data:[],
+              markLine: {
+                tooltip:{
+                  show: false,
+                  trigger:'none'
+                },
+                lineStyle: {
+                  type: 'dashed',
+                  color:'#000000',
+                  width: 0.5
+                },
+                data: intersectDepth
+              },
+              zlevel: 0
+            }
+
+          ]
+        };
+
+        myChart.setOption(option);
+        
+      });
+      
+      
+      
+      function getUrlParam(name) {
+          var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+          var r = window.location.search.substr(1).match(reg); //匹配目标参数
+          if (r != null) return unescape(r[2]);
+          return null; //返回参数值
+      }
+      
+      function getPipeShapeSymbol(shape){
+        return shape === 'box' ? 'rect' : 'circle'
+      }
+      
+      function getPipeShapeDesc(shape){
+        return shape === 'box' ? '方管' : '圆管'
+      }
+      
+      function getPipeSizeDesc(shape,size){
+        if (shape === 'cylinder'){
+          return '' + size.diameter
+        }
+
+        if (shape === 'box') {
+          return  size.width + '*' + size.height
+        }
+      }
+      
+      function getPipeSymbolSize(shape,size){
+        
+        if (shape === 'cylinder'){
+          return size.diameter * 20
+        }
+        
+        if (shape === 'box') {
+          return [size.width * 20, size.height * 20];
+        }
+        
+      }
+      
+      function getPipeColor(type){
+        var color
+        switch (type){
+          case 'dq':
+            color = '#000000'
+            break
+          case 'ws':
+            color = '#4c3926'
+            break
+          case 'ys':
+            color = '#4c3926'
+            break
+          case 'zq':
+            color = '#ff8000'
+            break
+          case 'rq':
+            color = '#ff00ff'
+            break
+          case 'gd':
+            color = '#ff0000'
+            break
+          case 'ld':
+            color = '#ff0000'
+            break
+          case 'js':
+            color = '#00ffff'
+            break
+          case 'ds':
+            color = '#00ff00'
+            break
+          case 'dx':
+            color = '#00ff00'
+            break
+        }
+        return color
+      }
+      
+    </script>
+  </body>
+</html>
