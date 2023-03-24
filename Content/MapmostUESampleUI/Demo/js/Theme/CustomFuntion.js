@@ -41,3 +41,12 @@ $("#goodNight").click(function () {
     }
     mapmostUE.customFunction(options);
 })
+
+//添加路径动画
+$("#AddAnimationPath").click(function () {
+    let options = {
+        "functionName": "AddAnimationPath",
+        "params": {}
+    }
+    mapmostUE.customFunction(options);
+})
