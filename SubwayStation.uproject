@@ -29,7 +29,7 @@
 		{
 			"Name": "MapmostUE",
 			"Enabled": true
-		}
+		},
 		{
 			"Name": "DatasmithImporter",
 			"Enabled": true
