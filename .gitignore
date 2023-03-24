@@ -1,1 +1,8 @@
 /Plugins
+/.vs
+/Binaries
+/.idea
+/*.sln
+/Intermediate
+/Saved
+/*.vsconfig
