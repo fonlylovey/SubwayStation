@@ -85,11 +85,14 @@ const config = {
         "VideoFusion": {
             "addSingleVideoFusion": "视频融合",
             "removeSingleVideoFusion": "关闭视频融合",
+            "addPOIFeature": "添加POI",
+            "removePOIFeature": "移除POI"
         }
     },
     "AnimationPath": {
         "AddAnimationPath": {
-            "AddAnimationPath": "添加路径动画"
+            "addAnimationPath": "添加路径动画",
+            "removeAnimationPath": "移除路径动画"
         }
     }
 }
