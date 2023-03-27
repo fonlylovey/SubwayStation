@@ -32,7 +32,17 @@ void UFloorComponent::BeginPlay()
 	AStaticMeshActor* Floor = Cast<AStaticMeshActor>(OwnerActor);
 	if (Floor != nullptr)
 	{
-		StaticMeshComponent = Floor->GetStaticMeshComponent();
+		StaticMeshComponents.Add(Floor->GetStaticMeshComponent());
+	}
+	TArray<AActor*> AttachedActors;
+	OwnerActor->GetAttachedActors(AttachedActors, true, true);
+	for (auto& Itr : AttachedActors)
+	{
+		UActorComponent* Component = Itr->GetComponentByClass(UStaticMeshComponent::StaticClass());
+		if (Component != nullptr)
+		{
+			StaticMeshComponents.Add(Cast<UStaticMeshComponent>(Component));
+		}
 	}
 
 	OriginLocation = OwnerActor->GetActorLocation();
@@ -79,19 +89,32 @@ void UFloorComponent::SpaceSwitch(bool bSwitchToThreeDim)
 
 void UFloorComponent::SetTransparent(FName ParameterName, float Transparency, bool bLerp)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Components Number: %d"), StaticMeshComponents.Num());
+	if (StaticMeshComponents.IsEmpty())
+	{
+		return;
+	}
+	
 	TranspParamName = ParameterName;
 	TranspParamValue = Transparency;
-	StaticMeshComponent->GetMaterial(0)->GetScalarParameterDefaultValue(TranspParamName, CurTranspParamValue);
-	if (StaticMeshComponent != nullptr)
+
+	TArray<UStaticMeshComponent*> Components;
+	//获取附加的 Actor
+	TArray<AActor*> AttachedActors;
+	OwnerActor->GetAttachedActors(AttachedActors, true, true);
+
+	//假设透明度是统一的，并且透明度的参数在第一个材质上
+	StaticMeshComponents[0]->GetMaterial(0)->GetScalarParameterDefaultValue(TranspParamName, CurTranspParamValue);
+	if (bLerp)
 	{
-		if (bLerp)
+		TranspLerpTimelineComp->PlayFromStart();
+	}
+	else
+	{
+		for (auto& Itr : StaticMeshComponents)
 		{
-			TranspLerpTimelineComp->PlayFromStart();
-		}
-		else
-		{
-			StaticMeshComponent->SetScalarParameterValueOnMaterials(TranspParamName, CurTranspParamValue);
-		}
+			Itr->SetScalarParameterValueOnMaterials(TranspParamName, CurTranspParamValue);
+		}	
 	}
 }
 
@@ -129,7 +152,10 @@ void UFloorComponent::OnSpaceSwitchUpdate(float Alpha)
 
 void UFloorComponent::OnTranspLerpUpdate(float Alpha)
 {
-	StaticMeshComponent->SetScalarParameterValueOnMaterials(TranspParamName, UKismetMathLibrary::Lerp(CurTranspParamValue, TranspParamValue, Alpha));
+	for (auto& Itr : StaticMeshComponents)
+	{
+		Itr->SetScalarParameterValueOnMaterials(TranspParamName, UKismetMathLibrary::Lerp(CurTranspParamValue, TranspParamValue, Alpha));	
+	}
 }
 
 void UFloorComponent::OnLiftLerpUpdate(float Alpha)

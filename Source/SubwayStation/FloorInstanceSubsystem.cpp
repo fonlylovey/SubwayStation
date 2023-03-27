@@ -40,4 +40,5 @@ void UFloorInstanceSubsystem::Execute(const FString& Data)
 void UFloorInstanceSubsystem::FloorLift(const FString& BuildingName, const int32 FloorIndex)
 {
 	GFloorManager->LiftFloor(BuildingName, FloorIndex, false, true);
+	GFloorManager->SetFloorTransparent(BuildingName, FloorIndex, TEXT("Transparency"), 1, true);
 }
