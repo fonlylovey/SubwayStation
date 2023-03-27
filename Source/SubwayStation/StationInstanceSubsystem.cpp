@@ -3,6 +3,8 @@
 
 #include "StationInstanceSubsystem.h"
 
+#include "FloorInstanceSubsystem.h"
+
 void UStationInstanceSubsystem::ExecJsEvent(const FString& jsonData)
 {
 	Test1(jsonData);
@@ -13,7 +15,7 @@ void UStationInstanceSubsystem::Test1(const FString& jsonData)
 {
 	//to do tranlate animation
 
-	
+	GetGameInstance()->GetSubsystem<UFloorInstanceSubsystem>()->Execute(jsonData);
 	
 }
 

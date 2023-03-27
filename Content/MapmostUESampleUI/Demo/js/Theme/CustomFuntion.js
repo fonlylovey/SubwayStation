@@ -66,3 +66,20 @@ $("#LiftB2").click(function () {
     }
     mapmostUE.customFunction(options);
 })
+
+$("#addAnimationPath").click(function () {
+    let data = {
+        "ID": "",
+        "Name": "",
+        "MeshRefPath": "",
+        "KeyPoints": [
+            [120.675462, 31.318861],
+            [120.673454, 31.31842]
+        ]
+    }
+    mapmostUE.customFunction(data);
+})
+
+$("#removeAnimationPath").click(function () {
+    mapmostUE.customFunction("id");
+})
