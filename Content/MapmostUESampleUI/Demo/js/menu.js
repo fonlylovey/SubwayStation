@@ -71,14 +71,12 @@ const dictionary = {
 const config = {
     "Floor": {
         "FloorLift": {
-            "B1": "B1",
-            "B2": "B2",
-            "B3": "B3"
+            "LiftB1": "B1",
+            "LiftB1": "B2"
         },
         "FloorHighlight": {
-            "B1": "B1",
-            "B2": "B2",
-            "B3": "B3"
+            "HighlightB1": "B1",
+            "HighlightB2": "B2"
         }
     },
     "SpatialAnalysis": {
@@ -91,7 +89,7 @@ const config = {
     },
     "AnimationPath": {
         "AddAnimationPath": {
-            "addAnimationPath": "添加路径动画",
+            "addAnimationPath_1": "添加路径动画",
             "removeAnimationPath": "移除路径动画"
         }
     }

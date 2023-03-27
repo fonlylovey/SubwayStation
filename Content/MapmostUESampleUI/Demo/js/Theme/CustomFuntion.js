@@ -42,11 +42,27 @@ $("#goodNight").click(function () {
     mapmostUE.customFunction(options);
 })
 
-//添加路径动画
-$("#AddAnimationPath").click(function () {
+
+//抬升负一层
+$("#LiftB1").click(function () {
     let options = {
-        "functionName": "AddAnimationPath",
-        "params": {}
+        "functionName": "FloorLift",
+        "params": {
+            "buildingName": "Station",
+            "floorIndex": -1
+        }
+    }
+    mapmostUE.customFunction(options);
+})
+
+//抬升负二层
+$("#LiftB2").click(function () {
+    let options = {
+        "functionName": "FloorLift",
+        "params": {
+            "buildingName": "Station",
+            "floorIndex": -2
+        }
     }
     mapmostUE.customFunction(options);
 })
