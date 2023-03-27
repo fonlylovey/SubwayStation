@@ -27,13 +27,17 @@ void UFloorInstanceSubsystem::Execute(const FString& Data)
 	FJsonSerializer::Deserialize(JsonReader, JsonObject);
 
 	FString FunctionName = JsonObject->GetStringField("functionName");
-	if (FunctionName == "FloorLift")
+	TSharedPtr<FJsonObject> ParamObject = JsonObject->GetObjectField("params");
+	if (ParamObject.IsValid())
 	{
-		TSharedPtr<FJsonObject> ParamObject = JsonObject->GetObjectField("params");
-		if (ParamObject.IsValid())
+		if (FunctionName == "FloorLift")
 		{
 			FloorLift(ParamObject->GetStringField("buildingName"), ParamObject->GetIntegerField("floorIndex"));	
 		}
+		if (FunctionName == "SpaceSwitch")
+		{
+			SpaceSwitch(ParamObject->GetStringField("buildingName"), !ParamObject->GetBoolField("isPlane"));
+		}	
 	}
 }
 
@@ -41,4 +45,9 @@ void UFloorInstanceSubsystem::FloorLift(const FString& BuildingName, const int32
 {
 	GFloorManager->LiftFloor(BuildingName, FloorIndex, false, true);
 	GFloorManager->SetFloorTransparent(BuildingName, FloorIndex, TEXT("Transparency"), 1, true);
+}
+
+void UFloorInstanceSubsystem::SpaceSwitch(const FString& BuildingName, bool bSwitchToThreeDim)
+{
+	GFloorManager->SpaceSwitch(BuildingName, bSwitchToThreeDim);
 }
