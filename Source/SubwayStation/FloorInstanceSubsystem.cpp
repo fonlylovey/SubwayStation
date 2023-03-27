@@ -3,6 +3,8 @@
 
 #include "FloorInstanceSubsystem.h"
 
+#include "Manager/FloorManager.h"
+
 void UFloorInstanceSubsystem::Execute(const FString& Data)
 {
 	TSharedPtr<FJsonObject> JsonObject = nullptr;
@@ -22,5 +24,5 @@ void UFloorInstanceSubsystem::Execute(const FString& Data)
 
 void UFloorInstanceSubsystem::FloorLift(const FString& BuildingName, const int32 FloorIndex)
 {
-
+	GFloorManager->LiftFloor(BuildingName, FloorIndex, false, true);
 }
