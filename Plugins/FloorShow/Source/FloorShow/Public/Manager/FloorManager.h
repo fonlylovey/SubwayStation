@@ -183,3 +183,5 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorManager")
 	void LiftFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp);
 };
+
+#define GFloorManager UFloorManager::GetFloorManager()
