@@ -111,6 +111,8 @@ $(function () {
     $('body').append("<script language=javascript src='js/Theme/IQuery.js'></script>");
     $('body').append("<script language=javascript src='js/Theme/PipelineAnalysis.js'></script>");
     $('body').append("<script language=javascript src='js/Theme/CustomFuntion.js'></script>");
+    $('body').append("<script language=javascript src='js/Station/POI.js'></script>");
+    $('body').append("<script language=javascript src='js/Station/AnimationPath.js'></script>");
 
     //开始增加
     mapmostUE.init();
