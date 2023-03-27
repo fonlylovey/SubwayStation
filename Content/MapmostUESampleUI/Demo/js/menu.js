@@ -90,7 +90,11 @@ const config = {
     "AnimationPath": {
         "AddAnimationPath": {
             "addAnimationPath_1": "添加路径动画",
+<<<<<<< HEAD
             "removeAnimationPath": "移除路径动画"
+=======
+            "removeAnimationPath_1": "移除路径动画"
+>>>>>>> 43795cac966028666b24e10bde0a73df4e55284f
         }
     }
 }
