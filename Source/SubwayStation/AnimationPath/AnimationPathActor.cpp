@@ -29,6 +29,18 @@ void AAnimationPathActor::BeginPlay()
 	
 }
 
+void AAnimationPathActor::BeginDestroy()
+{
+	Super::BeginDestroy();
+	MoveMesh = nullptr;
+	MovePath = nullptr;
+}
+
+void AAnimationPathActor::InitData(const FAnimationPathData& data)
+{
+	
+}
+
 // Called every frame
 void AAnimationPathActor::Tick(float DeltaTime)
 {

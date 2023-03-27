@@ -17,4 +17,9 @@ class SUBWAYSTATION_API UStationInstanceSubsystem : public UGameInstanceSubsyste
 public:
 	UFUNCTION(BlueprintCallable)
 	void ExecJsEvent(const FString& jsonData);
+
+	void Test1(const FString& jsonData);
+
+	void Fengya(const FString& jsonData);
+	
 };
