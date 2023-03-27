@@ -4,6 +4,21 @@
 #include "FloorInstanceSubsystem.h"
 
 #include "Manager/FloorManager.h"
+#include "Singleton/GameSingleton.h"
+
+void UFloorInstanceSubsystem::Initialize(FSubsystemCollectionBase& Collection)
+{
+	Super::Initialize(Collection);
+	
+	UGameSingleton::InitGameSingleton(this);
+}
+
+void UFloorInstanceSubsystem::Deinitialize()
+{
+	Super::Deinitialize();
+
+	UGameSingleton::UninitGameSingleton();
+}
 
 void UFloorInstanceSubsystem::Execute(const FString& Data)
 {

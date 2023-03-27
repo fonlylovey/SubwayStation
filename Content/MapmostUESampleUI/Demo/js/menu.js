@@ -9,7 +9,6 @@
 const menu = [
     "Floor",
     "SpatialAnalysis",
-    "AnimationPath"
 ];
 
 
@@ -65,14 +64,13 @@ const dictionary = {
     "SpatialAnalysis": "空间分析",
     "VideoFusion": "视频融合",
     "AnimationPath": "路径动画",
-    "AddAnimationPath": "路径动画操作"
 }
 
 const config = {
     "Floor": {
         "FloorLift": {
             "LiftB1": "B1",
-            "LiftB1": "B2"
+            "LiftB2": "B2"
         },
         "FloorHighlight": {
             "HighlightB1": "B1",
@@ -85,12 +83,10 @@ const config = {
             "removeSingleVideoFusion": "关闭视频融合",
             "addPOIFeature": "添加POI",
             "removePOIFeature": "移除POI"
-        }
-    },
-    "AnimationPath": {
-        "AddAnimationPath": {
-            "addAnimationPath_1": "添加路径动画",
-            "removeAnimationPath_1": "移除路径动画"
+        },
+        "AnimationPath": {
+            "addAnimationPath": "添加路径动画",
+            "removeAnimationPath": "移除路径动画"
         }
     }
 }

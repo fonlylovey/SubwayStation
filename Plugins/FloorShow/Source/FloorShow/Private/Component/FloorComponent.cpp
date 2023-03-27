@@ -36,7 +36,7 @@ void UFloorComponent::BeginPlay()
 	}
 
 	OriginLocation = OwnerActor->GetActorLocation();
-
+	
 	//添加楼层到FloorManager中
 	GGameSingleton->GetSingletonAttribute<UFloorManager>()->EmplaceFloor(BuildingName, FloorIndex, OwnerActor);
 
