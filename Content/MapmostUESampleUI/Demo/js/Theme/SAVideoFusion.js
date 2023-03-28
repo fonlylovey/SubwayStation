@@ -2,20 +2,23 @@
 $("#addSingleVideoFusion").click(function (){
     
     mapmostUE.flyTo({
-        "location":[120.73912, 31.305717, 139.857681],
-        "rotation": [0,-28.236055,-13.014364],
+        "location":[120.74310714615599, 31.336815251714718, 256.4348184739662],
+        "rotation": [0,-67.90760803222656,-100.98565673828125],
         "time":2
     });
     
     mapmostUE.addVideoFusion({
-        cameraPosition: [120.739105, 31.305603,  61.201748],
-        fov: 45.643803,
-        cameraRotation:[ 0.673769,-12.545454,-13.387241],
+        cameraPosition : [120.74284117616449, 31.337583633518385, 210.24927729845976],
+        // cameraPosition: [120.739105, 31.305603,  61.201748],
+        fov: 80,
+        // cameraRotation:[ 0.673769,-12.545454,-13.387241],
+        cameraRotation:[ -12,-80,-90],
         // url: "rtsp://192.168.34.87:554",
         // url: "http://localhost:4321/Demo/asset/aoti_video_fusion.mp4",
-        url: "http://192.168.34.213:8888/SIPSD/video/aoti_video_fusion.mp4",
+        // url: "http://192.168.34.213:8888/SIPSD/video/aoti_video_fusion.mp4",
         // url: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4",
-        videoSize: [1280,720],
+        url: "rtsp://192.168.174.238/testStream",
+        videoSize: [1920,1080],
         far: 58606.800781,
         opacity: 1
     });
