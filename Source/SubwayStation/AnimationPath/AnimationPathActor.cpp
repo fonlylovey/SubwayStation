@@ -2,7 +2,7 @@
 
 
 #include "AnimationPathActor.h"
-
+#include "CesiumGeoreference.h"
 #include "SubwayStation/Common/UtilsLibrary.h"
 
 
@@ -17,9 +17,15 @@ AAnimationPathActor::AAnimationPathActor()
 	MoveMesh->SetCollisionProfileName(UCollisionProfile::BlockAll_ProfileName);
 	MoveMesh->Mobility = EComponentMobility::Movable;
 	MoveMesh->bUseDefaultCollision = true;
-
+	MoveMesh->SetWorldScale3D(FVector3d(30, 30, 30));
+	
+	SkeMoveMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeMoveMesh"));
+	SkeMoveMesh->SetWorldScale3D(FVector3d(50, 50, 50));
+	
 	MovePath = CreateDefaultSubobject<USplineComponent>(TEXT("MovePath"));
 	MovePath->SetupAttachment(RootComponent);
+	
+	//GlobeAnchor = CreateDefaultSubobject<UCesiumGlobeAnchorComponent>("CesiumAnchor");
 }
 
 // Called when the game starts or when spawned
@@ -38,22 +44,78 @@ void AAnimationPathActor::BeginDestroy()
 
 void AAnimationPathActor::InitData(const FAnimationPathData& data)
 {
+	FSoftObjectPath sorftPath(data.MeshRefPath);
+	UObject* obj = sorftPath.TryLoad();
+	if(IsValid(obj))
+	{
+		UStaticMesh* staticMesh = Cast<UStaticMesh>(obj);
+		if(staticMesh != nullptr)
+		{
+			MoveMesh->SetStaticMesh(staticMesh);
+		}
+		else
+		{
+			auto skeMesh = Cast<USkeletalMesh>(obj);
+			
+			if(skeMesh != nullptr)
+			{
+				SkeMoveMesh->SetSkeletalMesh(skeMesh);
+			}
+		}
+	}
 	
+	MovePath->ClearSplinePoints();
+	for (int i = 0; i < data.KeyPoints.Num(); i++)
+	{
+		FSplinePoint keyPoint;
+		keyPoint.Position = data.KeyPoints[i];
+		keyPoint.InputKey = i;
+		MovePath->AddSplinePoint(data.KeyPoints[i], ESplineCoordinateSpace::World);
+	}
+	MovePath->UpdateSpline();
+	MovePath->Duration = data.Duration;
+	if(MoveMesh != nullptr)
+	{
+		MoveMesh->SetWorldLocation(data.KeyPoints[0]);
+	}
+	if(SkeMoveMesh != nullptr)
+	{
+		SkeMoveMesh->SetWorldLocation(data.KeyPoints[0]);
+	}
+
+	isLoopPlay = data.IsLoop;
+	isPlay = true;
 }
 
 // Called every frame
 void AAnimationPathActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if(!isPlay) return;
+	
 	FTransform transform = MovePath->GetTransformAtTime(currentTime, ESplineCoordinateSpace::World);
 	currentTime += DeltaTime / speedRate;
 	
 	if(currentTime > MovePath->Duration)
 	{
 		currentTime = 0;
-		UtilsLibrary::Log("Duration: " + FString::FormatAsNumber(MovePath->Duration) + "Current:" + FString::FormatAsNumber(currentTime), true);
+		if(!isLoopPlay)
+		{
+			isPlay = false;
+		}
+		//UtilsLibrary::Log("Duration: " + FString::FormatAsNumber(MovePath->Duration) + "Current:" + FString::FormatAsNumber(currentTime), true);
 	}
-	MoveMesh->SetWorldLocation(transform.GetLocation());
-	MoveMesh->SetWorldRotation(transform.GetRotation());
+	//GlobeAnchor->MoveToLongitudeLatitudeHeight(FVector3d(transform.GetLocation().X, transform.GetLocation().Y, 0));
+	
+	if(MoveMesh != nullptr)
+	{
+		MoveMesh->SetWorldLocation(transform.GetLocation());
+		MoveMesh->SetWorldRotation(transform.GetRotation().Rotator() + FRotator3d(0, -90, 0));
+	}
+	if(SkeMoveMesh != nullptr)
+	{
+		SkeMoveMesh->SetWorldLocation(transform.GetLocation());
+		SkeMoveMesh->SetWorldRotation(transform.GetRotation().Rotator() + FRotator3d(0, -90, 0));
+	}
 }
 

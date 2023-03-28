@@ -11,5 +11,5 @@ class SUBWAYSTATION_API UtilsLibrary : UBlueprintFunctionLibrary
 {
 public:
 	UFUNCTION(BlueprintCallable, Category = "UtilsLibrary")
-	static void Log(FString str, bool bScreen = false, float fFtime = 3, FColor color = FColor::Green);
+	static void Log(FString str, bool bScreen = true, float fFtime = 3, FColor color = FColor::Green);
 };

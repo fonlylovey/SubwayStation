@@ -3,6 +3,7 @@
 
 #include "Manager/FloorManager.h"
 
+#include "HeadMountedDisplayTypes.h"
 #include "Component/FloorComponent.h"
 #include "DSP/BufferOnePoleLPF.h"
 #include "Kismet/GameplayStatics.h"
@@ -102,6 +103,38 @@ UFloorComponent* UFloorManager::GetFloorComponent(const FString& BuildingName, i
 	return nullptr;
 }
 
+TArray<UFloorComponent*> UFloorManager::GetFloorComponentHigher(const FString& BuildingName, int32 FloorIndex)
+{
+	TArray<UFloorComponent*> Result;
+	TArray<UFloorComponent*> Components = GetBuildingComponentArray(BuildingName);
+
+	for (auto& Itr : Components)
+	{
+		if (Itr->FloorIndex > FloorIndex)
+		{
+			Result.Add(Itr);
+		}
+	}
+
+	return Result;
+}
+
+TArray<UFloorComponent*> UFloorManager::GetFloorComponentLower(const FString& BuildingName, int32 FloorIndex)
+{
+	TArray<UFloorComponent*> Result;
+	TArray<UFloorComponent*> Components = GetBuildingComponentArray(BuildingName);
+
+	for (auto& Itr : Components)
+	{
+		if (Itr->FloorIndex < FloorIndex)
+		{
+			Result.Add(Itr);
+		}
+	}
+
+	return Result;
+}
+
 void UFloorManager::SpaceSwitch(const FString& BuildingName, bool bSwitchToThreeDim)
 {
 	TArray<AActor*> BuildingArray = GetBuildingArray(BuildingName);
@@ -116,7 +149,8 @@ void UFloorManager::SpaceSwitch(const FString& BuildingName, bool bSwitchToThree
 	}
 }
 
-void UFloorManager::SetBuildingTransparent(const FString& BuildingName, FName ParameterName, float Transparency, bool bLerp)
+void UFloorManager::SetBuildingTransparent(const FString& BuildingName, FName ParameterName, float Transparency,
+                                           bool bLerp)
 {
 	TArray<AActor*> BuildingArray = GetBuildingArray(BuildingName);
 
@@ -130,7 +164,8 @@ void UFloorManager::SetBuildingTransparent(const FString& BuildingName, FName Pa
 	}
 }
 
-void UFloorManager::SetFloorTransparent(const FString& BuildingName, const int32 FloorIndex,FName ParameterName, float Transparency,
+void UFloorManager::SetFloorTransparent(const FString& BuildingName, const int32 FloorIndex, FName ParameterName,
+                                        float Transparency,
                                         bool bLerp)
 {
 	AActor* Floor = GetFloor(BuildingName, FloorIndex);
@@ -173,11 +208,29 @@ void UFloorManager::LiftBuilding(const FString& BuildingName, bool bReverse, boo
 	}
 }
 
-void UFloorManager::LiftFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp)
+void UFloorManager::ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp)
 {
-	UFloorComponent* Component = GetFloorComponent(BuildingName, FloorIndex);
-	if (Component != nullptr)
+	TArray<UFloorComponent*> Components = GetFloorComponentHigher(BuildingName, FloorIndex);
+	for (auto& Itr : Components)
 	{
-		Component->FloorLift(bReverse, bLerp);
+		Itr->FloorLift(bReverse, bLerp);
+	}
+}
+
+void UFloorManager::HighlightFloor(const FString& BuildingName, int32 FloorIndex)
+{
+	TArray<UFloorComponent*> Components = GetBuildingComponentArray(BuildingName);
+	for (auto& Itr : Components)
+	{
+		Itr->SetAsTransparency(Itr->FloorIndex == FloorIndex, nullptr);
+	}
+}
+
+void UFloorManager::ReverseHighlight(const FString& BuildingName)
+{
+	TArray<UFloorComponent*> Components = GetBuildingComponentArray(BuildingName);
+	for (auto& Itr : Components)
+	{
+		Itr->SetAsTransparency(true, nullptr);
 	}
 }

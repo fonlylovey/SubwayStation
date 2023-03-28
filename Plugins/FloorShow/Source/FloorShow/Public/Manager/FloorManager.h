@@ -112,6 +112,24 @@ public:
 	UFloorComponent* GetFloorComponent(const FString& BuildingName, int32 FloorIndex);
 
 	/**
+	 * 获取高于此楼层的所有楼层组件
+	 *
+	 * @param BuildingName		楼栋名称
+	 * @param FloorIndex		楼层号
+	 */
+	UFUNCTION(BlueprintPure, Category = "FloorShow|FloorManager")
+	TArray<UFloorComponent*> GetFloorComponentHigher(const FString& BuildingName, int32 FloorIndex);
+
+	/**
+	 * 获取低于此楼层的所有楼层组件
+	 *
+	 * @param BuildingName		楼栋名称
+	 * @param FloorIndex		楼层号
+	 */
+	UFUNCTION(BlueprintPure, Category = "FloorShow|FloorManager")
+	TArray<UFloorComponent*> GetFloorComponentLower(const FString& BuildingName, int32 FloorIndex);
+
+	/**
 	 * 楼栋三维，二维空间切换
 	 *
 	 * @param BuildingName			楼栋名称
@@ -181,7 +199,24 @@ public:
 	 * @param bLerp				是否启用过渡
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorManager")
-	void LiftFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp);
+	void ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp);
+
+	/**
+	 * 突出展示某一层
+	 *
+	 * @param BuildingName		楼栋名称
+	 * @param FloorIndex		楼层号
+	 */
+	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorManager")
+	void HighlightFloor(const FString& BuildingName, int32 FloorIndex);
+
+	/**
+	 * 还原楼层突出展示
+	 *
+	 * @param BuildingName		楼栋名称
+	 */
+	UFUNCTION(BlueprintCallable,  Category = "FloorShow|FloorManager")
+	void ReverseHighlight(const FString& BuildingName);
 };
 
 #define GFloorManager UFloorManager::GetFloorManager()

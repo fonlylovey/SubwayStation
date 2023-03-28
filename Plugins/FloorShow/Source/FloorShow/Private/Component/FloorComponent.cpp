@@ -46,6 +46,12 @@ void UFloorComponent::BeginPlay()
 	}
 
 	OriginLocation = OwnerActor->GetActorLocation();
+	for (auto& Itr : StaticMeshComponents)
+	{
+		FMaterialArray Arr;
+		Arr.MaterialArray = Itr->GetMaterials();
+		OriginMaterials.Add(Arr);
+	}
 	
 	//添加楼层到FloorManager中
 	GGameSingleton->GetSingletonAttribute<UFloorManager>()->EmplaceFloor(BuildingName, FloorIndex, OwnerActor);
@@ -60,6 +66,16 @@ void UFloorComponent::BeginPlay()
 		SpaceSwitchCurve = DefaultCurve;
 		TranspLerpCurve = DefaultCurve;
 		LiftLerpCurve = DefaultCurve;
+	}
+
+	if (TranspMaterialInstance == nullptr)
+	{
+		FStringAssetReference DefaultCurveRef = "/Script/Engine.MaterialInstanceConstant'/FloorShow/MI_Transparency.MI_Transparency'";
+		DefaultCurveRef.TryLoad();
+		//尝试从路径中查找资源
+		UObject* MyCharacterObj = DefaultCurveRef.ResolveObject();
+		UMaterialInstance* DefaltTanspMaterial = Cast<UMaterialInstance>(MyCharacterObj);
+		TranspMaterialInstance = DefaltTanspMaterial;
 	}
 
 	//三维、二维空间切换时间轴初始化
@@ -137,6 +153,40 @@ void UFloorComponent::FloorLift(bool bReverse, bool bLerp)
 	else
 	{
 		OwnerActor->SetActorLocation(TargetLiftLocation);
+	}
+}
+
+FVector UFloorComponent::GetLiftLocation()
+{
+	return TargetLiftLocation;
+}
+
+void UFloorComponent::SetLiftLocation(FVector NewLiftLocation)
+{
+	TargetLiftLocation = NewLiftLocation;
+}
+
+void UFloorComponent::SetAsTransparency(bool bReverse, UMaterialInstance* TransParencyMaterial)
+{
+	if (TransParencyMaterial == nullptr)
+	{
+		TransParencyMaterial = TranspMaterialInstance;
+	}
+	
+	for (int32 i = 0; i < StaticMeshComponents.Num(); i++)
+	{
+		TArray<UMaterialInterface*> ComponentMaterials = OriginMaterials[i].MaterialArray;
+		for	(int32 j = 0; j < ComponentMaterials.Num(); j++)
+		{
+			if (bReverse)
+			{
+				StaticMeshComponents[i]->SetMaterial(j, ComponentMaterials[j]);	
+			}
+			else
+			{
+				StaticMeshComponents[i]->SetMaterial(j, TransParencyMaterial);
+			}
+		}
 	}
 }
 
