@@ -45,8 +45,9 @@ private:
 	UPROPERTY()
 	AActor* OwnerActor = nullptr;
 
-	UStaticMeshComponent* StaticMeshComponent = nullptr;
-
+	// UStaticMeshComponent* StaticMeshComponent = nullptr;
+	TArray<UStaticMeshComponent*> StaticMeshComponents;
+	
 	//三维、二维切换时间轴
 	UPROPERTY()
 	UTimelineComponent* SpaceSwitchTimelineComp = nullptr;

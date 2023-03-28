@@ -73,7 +73,7 @@ const config = {
     "Floor": {
         "FloorLift": {
             "LiftB1": "B1",
-            "LiftB1": "B2"
+            "LiftB2": "B2"
         },
         "FloorHighlight": {
             "HighlightB1": "B1",

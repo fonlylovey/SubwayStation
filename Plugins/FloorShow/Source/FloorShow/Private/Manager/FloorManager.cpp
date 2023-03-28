@@ -36,6 +36,7 @@ void UFloorManager::EmplaceBuilding(const FString& BuildingName, FBuilding Build
 
 void UFloorManager::EmplaceFloor(const FString& BuildingName, int32 FloorIndex, AActor* Floor)
 {
+	UE_LOG(LogTemp, Warning, TEXT("%p"), this);
 	FBuilding& BuildingStruct = BuildingMap.FindOrAdd(BuildingName);
 	BuildingStruct.FloorMap.Emplace(FloorIndex, Floor);
 }
