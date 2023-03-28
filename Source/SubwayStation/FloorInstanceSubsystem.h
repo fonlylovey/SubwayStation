@@ -20,8 +20,15 @@ public:
 	
 	void Execute(const FString& Data);
 
+	//抬升楼层
 	void FloorLift(const FString& BuildingName, const int32 FloorIndex);
+	//复原楼层
 	void ReverseLiftBuilding(const FString& BuildingName);
 
+	//二维、三维融合模式
 	void SpaceSwitch(const FString& BuildingName, bool bSwitchToThreeDim);
+	
+	//突出展示某一层
+	void HighlightFloor(const FString& BuildingName, const int32 FloorIndex);
+	void ReverseHighlight(const FString& BuildingName);
 };

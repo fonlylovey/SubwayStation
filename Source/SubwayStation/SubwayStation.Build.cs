@@ -11,7 +11,8 @@ public class SubwayStation : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore",
 			"MapmostUE",
 			"Json",
-			"JsonUtilities"
+			"JsonUtilities",
+			"CesiumRuntime"
 		});
 		
 		PrivateDependencyModuleNames.AddRange(new string[] { "FloorShow" });

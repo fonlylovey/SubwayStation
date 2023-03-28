@@ -3,6 +3,7 @@
 
 #include "FloorInstanceSubsystem.h"
 
+#include "Component/FloorComponent.h"
 #include "Manager/FloorManager.h"
 #include "Singleton/GameSingleton.h"
 
@@ -36,6 +37,10 @@ void UFloorInstanceSubsystem::Execute(const FString& Data)
 		{
 			FloorLift(ParamObject->GetStringField("buildingName"), ParamObject->GetIntegerField("floorIndex"));
 		}
+		if (FunctionName == "Highlight")
+		{
+			HighlightFloor(ParamObject->GetStringField("buildingName"), ParamObject->GetIntegerField("floorIndex"));
+		}
 		if (FunctionName == "SpaceSwitch")
 		{
 			SpaceSwitch(ParamObject->GetStringField("buildingName"), !ParamObject->GetBoolField("isPlane"));
@@ -44,13 +49,25 @@ void UFloorInstanceSubsystem::Execute(const FString& Data)
 		{
 			ReverseLiftBuilding(ParamObject->GetStringField("buildingName"));
 		}
+		if (FunctionName == "ReverseHighlight")
+		{
+			ReverseHighlight(ParamObject->GetStringField("buildingName"));
+		}
 	}
 }
 
 void UFloorInstanceSubsystem::FloorLift(const FString& BuildingName, const int32 FloorIndex)
 {
+	//增加第零层抬升高度
+	UFloorComponent* Component = GFloorManager->GetFloorComponent("Station", 0);
+	if (Component != nullptr)
+	{
+		Component->SetLiftLocation(FVector(Component->GetLiftLocation().X, Component->GetLiftLocation().Y, 4000));
+	}	
+
 	//移动楼层
-	GFloorManager->LiftFloor(BuildingName, FloorIndex, false, true);
+	GFloorManager->ShowFloor(BuildingName, FloorIndex, false, true);
+	
 	//设置物体透明渐变
 	// GFloorManager->SetFloorTransparent(BuildingName, FloorIndex, TEXT("Transparency"), 0, true);
 }
@@ -66,4 +83,14 @@ void UFloorInstanceSubsystem::ReverseLiftBuilding(const FString& BuildingName)
 void UFloorInstanceSubsystem::SpaceSwitch(const FString& BuildingName, bool bSwitchToThreeDim)
 {
 	GFloorManager->SpaceSwitch(BuildingName, bSwitchToThreeDim);
+}
+
+void UFloorInstanceSubsystem::HighlightFloor(const FString& BuildingName, const int32 FloorIndex)
+{
+	GFloorManager->HighlightFloor(BuildingName, FloorIndex);
+}
+
+void UFloorInstanceSubsystem::ReverseHighlight(const FString& BuildingName)
+{
+	GFloorManager->ReverseHighlight(BuildingName);
 }

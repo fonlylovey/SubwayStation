@@ -7,9 +7,9 @@
 // ];
 
 const menu = [
-    "Camera",
     "Floor",
     "SpatialAnalysis",
+    "Camera"
 ];
 
 
@@ -59,10 +59,10 @@ const menu = [
 
 const dictionary = {
     "Camera": "相机操作",
-    "Interaction": "交互",
+    "Event": "事件",
     "Floor": "楼层操作",
     "SpatialAnalysis": "空间分析",
-    "FloorLift": "楼层抬升",
+    "FloorLift": "楼层展示",
     "FloorHighlight": "楼层突出展示",
     "SpatialAnalysis": "空间分析",
     "VideoFusion": "视频融合",
@@ -70,20 +70,16 @@ const dictionary = {
 }
 
 const config = {
-    "Camera": {
-        "Interaction": {
-            "getCameraParameters": "获取相机参数",
-        }
-    },
     "Floor": {
         "FloorLift": {
             "LiftB1": "B1",
             "LiftB2": "B2",
-            "ReverseLift": "还原抬升"
+            "ReverseBuildingLift": "还原所有"
         },
         "FloorHighlight": {
             "HighlightB1": "B1",
-            "HighlightB2": "B2"
+            "HighlightB2": "B2",
+            "ReverseHighlight": "还原所有"
         }
     },
     "SpatialAnalysis": {
@@ -96,6 +92,17 @@ const config = {
         "AnimationPath": {
             "addAnimationPath": "添加路径动画",
             "removeAnimationPath": "移除路径动画"
+        }
+    },
+    "Camera": {
+        "Event": {
+            "openMousePick": "开启地图拾取",
+            "closeMousePick": "关闭地图拾取",
+            "getCameraParameters": "获取相机参数",
+            //"openMapStatusListen": "开启相机参数监听",
+           // "closeMapStatusListen": "关闭相机参数监听",
+            //"startQueryProperty": "开启三维对象查属性",
+            //"closeQueryProperty": "关闭三维对象查属性"
         }
     }
 }
