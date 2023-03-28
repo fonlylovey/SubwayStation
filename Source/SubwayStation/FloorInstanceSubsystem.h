@@ -21,6 +21,7 @@ public:
 	void Execute(const FString& Data);
 
 	void FloorLift(const FString& BuildingName, const int32 FloorIndex);
+	void ReverseLiftBuilding(const FString& BuildingName);
 
 	void SpaceSwitch(const FString& BuildingName, bool bSwitchToThreeDim);
 };
