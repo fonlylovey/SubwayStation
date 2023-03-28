@@ -13,8 +13,9 @@ $("#addSingleVideoFusion").click(function (){
         cameraRotation:[ 0.673769,-12.545454,-13.387241],
         // url: "rtsp://192.168.34.87:554",
         // url: "http://localhost:4321/Demo/asset/aoti_video_fusion.mp4",
-        url: "http://192.168.34.213:8888/SIPSD/video/aoti_video_fusion.mp4",
+        // url: "http://192.168.34.213:8888/SIPSD/video/aoti_video_fusion.mp4",
         // url: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4",
+        url: "rtsp://192.168.174.238/testStream",
         videoSize: [1280,720],
         far: 58606.800781,
         opacity: 1
