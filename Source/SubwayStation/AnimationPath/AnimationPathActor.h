@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Components/SplineComponent.h"
+#include "CesiumGlobeAnchorComponent.h"
 #include "GameFramework/Actor.h"
+#include "Math/TransformCalculus3D.h"
 #include "AnimationPathActor.generated.h"
 
 USTRUCT(BlueprintType)
@@ -18,10 +20,25 @@ struct FAnimationPathData
 	UPROPERTY(EditAnywhere)
 	FString Name;
 
+	UPROPERTY(EditAnywhere)
+	float Duration;
+
+	UPROPERTY(EditAnywhere)
+	bool IsLoop;
+	
 	//动画主体的资产引用目录
 	UPROPERTY(EditAnywhere)
 	FString MeshRefPath;
 
+	UPROPERTY(EditAnywhere)
+	FVector3d DefaultTranslate;
+
+	UPROPERTY(EditAnywhere)
+	FRotator3d DefaultRotator;
+
+	UPROPERTY(EditAnywhere)
+	FVector3d DefaultScale;
+	
 	//路径动画的关键点
 	UPROPERTY(EditAnywhere)
 	TArray<FVector3d> KeyPoints;
@@ -61,8 +78,18 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* MoveMesh = nullptr;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	USkeletalMeshComponent* SkeMoveMesh = nullptr;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UCesiumGlobeAnchorComponent* GlobeAnchor = nullptr;
+	
 	float currentTime = 0.0;
 
+	bool isLoopPlay = true;
+
+	bool isPlay = false;
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float speedRate = 1.0;
 
