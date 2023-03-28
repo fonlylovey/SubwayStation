@@ -53,6 +53,11 @@ $("#LiftB1").click(function () {
         }
     }
     mapmostUE.customFunction(options);
+    mapmostUE.flyTo({
+        "location":[120.74404843296949, 31.336627710197384, 112.20214479630758],
+        "rotation": [0,-34.30305480957031,-128.84765625],
+        "time":1
+    });
 })
 
 //抬升负二层
@@ -65,6 +70,21 @@ $("#LiftB2").click(function () {
         }
     }
     mapmostUE.customFunction(options);
+    mapmostUE.flyTo({
+        "location":[120.74367087719709, 31.336558215785985, 130.62407016963746],
+        "rotation": [0,-41.003055572509766,-116.54766082763672],
+        "time":1
+    });
+})
+
+//还原楼层抬升
+$("ReverseLift").click(function (){
+    let options = {
+        "functionName": "ReverseLiftBuilding",
+        "params": {
+            "buildingName": "Station"
+        }
+    }
 })
 
 $("#addAnimationPath").click(function () {
