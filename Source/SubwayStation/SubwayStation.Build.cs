@@ -15,6 +15,8 @@ public class SubwayStation : ModuleRules
 			"CesiumRuntime"
 		});
 		
+		PrivateDependencyModuleNames.AddRange(new string[] { "FloorShow" });
+		
 		// Uncomment if you are using Slate U
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		

@@ -6,6 +6,8 @@
 #include "Common/UtilsLibrary.h"
 #include "CesiumGeoreference.h"
 
+#include "FloorInstanceSubsystem.h"
+
 void UStationInstanceSubsystem::ExecJsEvent(const FString& jsonData)
 {
 	if(Georeference == nullptr)
@@ -20,7 +22,7 @@ void UStationInstanceSubsystem::Test1(const FString& jsonData)
 {
 	//to do tranlate animation
 
-	
+	GetGameInstance()->GetSubsystem<UFloorInstanceSubsystem>()->Execute(jsonData);
 	
 }
 
