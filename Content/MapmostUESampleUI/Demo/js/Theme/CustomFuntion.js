@@ -75,7 +75,7 @@ $("#addAnimationPath").click(function () {
             "Name": "路径动画1",
             "Duration": 20,
             "IsLoop": false,
-            "MeshRefPath": "/Engine/EngineMeshes/SM_MatPreviewMesh_01.SM_MatPreviewMesh_01",
+            "MeshRefPath": "/Game/SM_MatPesh.SM_MatPesh",
             "KeyPoints": [
                 [120.7394622738,31.3419559124],
                 [120.7395138570,31.3368457234],
@@ -95,7 +95,7 @@ $("#addAnimationPath").click(function () {
             "Name": "路径动画2",
             "duration": 20,
             "IsLoop": true,
-            "MeshRefPath": "/Engine/Tutorial/SubEditors/TutorialAssets/Character/TutorialTPP.TutorialTPP",
+            "MeshRefPath": "SkeletalMesh'/Game/TutorialTPP.TutorialTPP'",
             "KeyPoints": [
                 [120.7435100269,31.3372999038],
                 [120.7435697569,31.3337764706],
