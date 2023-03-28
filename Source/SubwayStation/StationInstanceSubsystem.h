@@ -21,5 +21,9 @@ public:
 	void Test1(const FString& jsonData);
 
 	void Fengya(const FString& jsonData);
-	
+
+private:
+	TArray<class AAnimationPathActor*> ActorList;
+
+	class ACesiumGeoreference* Georeference = nullptr;
 };

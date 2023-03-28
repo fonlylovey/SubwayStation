@@ -11,7 +11,8 @@ public class SubwayStation : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore",
 			"MapmostUE",
 			"Json",
-			"JsonUtilities"
+			"JsonUtilities",
+			"CesiumRuntime"
 		});
 		
 		// Uncomment if you are using Slate U

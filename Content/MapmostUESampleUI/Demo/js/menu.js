@@ -9,6 +9,7 @@
 const menu = [
     "Floor",
     "SpatialAnalysis",
+    "Camera"
 ];
 
 
@@ -57,6 +58,8 @@ const menu = [
 // }
 
 const dictionary = {
+    "Camera": "相机操作",
+    "Event": "事件",
     "Floor": "楼层操作",
     "SpatialAnalysis": "空间分析",
     "FloorLift": "楼层抬升",
@@ -87,6 +90,16 @@ const config = {
         "AnimationPath": {
             "addAnimationPath": "添加路径动画",
             "removeAnimationPath": "移除路径动画"
+        }
+    },
+    "Camera": {
+        "Event": {
+            "openMousePick": "开启地图拾取",
+            "closeMousePick": "关闭地图拾取",
+            //"openMapStatusListen": "开启相机参数监听",
+           // "closeMapStatusListen": "关闭相机参数监听",
+            //"startQueryProperty": "开启三维对象查属性",
+            //"closeQueryProperty": "关闭三维对象查属性"
         }
     }
 }
