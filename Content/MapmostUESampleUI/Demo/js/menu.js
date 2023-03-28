@@ -7,6 +7,7 @@
 // ];
 
 const menu = [
+    "Camera",
     "Floor",
     "SpatialAnalysis",
 ];
@@ -57,6 +58,8 @@ const menu = [
 // }
 
 const dictionary = {
+    "Camera": "相机操作",
+    "Interaction": "交互",
     "Floor": "楼层操作",
     "SpatialAnalysis": "空间分析",
     "FloorLift": "楼层抬升",
@@ -67,10 +70,16 @@ const dictionary = {
 }
 
 const config = {
+    "Camera": {
+        "Interaction": {
+            "getCameraParameters": "获取相机参数",
+        }
+    },
     "Floor": {
         "FloorLift": {
             "LiftB1": "B1",
-            "LiftB2": "B2"
+            "LiftB2": "B2",
+            "ReverseLift": "还原抬升"
         },
         "FloorHighlight": {
             "HighlightB1": "B1",
