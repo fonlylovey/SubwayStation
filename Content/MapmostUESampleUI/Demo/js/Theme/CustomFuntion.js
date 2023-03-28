@@ -195,7 +195,8 @@ $("#removeAnimationPath").click(function () {
     mapmostUE.customFunction(data);
 })
 
-$("#addPOIFeature").click(function () {
+$("#addPOIFeature").click(function () 
+{
     let poiData = {
         "type": "FeatureCollection",
         "name": "geo_samp",
@@ -208,12 +209,12 @@ $("#addPOIFeature").click(function () {
                 "type": "Feature",
                 "properties": {
                     "id": "location1",            // POI ID
-                    "name": "东方之门",           // POI 名称
-                    "desc": "较拥挤",
-                    "iconWidth":150,
-                    "iconHeight":50,
+                    "name": "方州公园站",           // POI 名称
+                    "desc": "",
+                    "iconWidth":128,
+                    "iconHeight":100,
                     "height": 5.177277,                // POI 点高程，单位米
-                    "detailUrl": popupUrl + "location1.html",  // 展示详细信息的web页面 （可选属性，值可为NULL）
+                    "detailUrl": "",  // 展示详细信息的web页面 （可选属性，值可为NULL）
                     "heading": 0,                  // 定位时偏航角（可选属性，值可为NULL），单位度
                     "pitch": -45,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
                     "distance": 120,               // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
@@ -221,19 +222,19 @@ $("#addPOIFeature").click(function () {
                 },
                 "geometry": {
                     "type": "Point",
-                    "coordinates": [120.675462, 31.318861]
+                    "coordinates": [120.7398435239,31.3192908454]
                 }
             },
             {
                 "type": "Feature",
                 "properties": {
                     "id": "location2",            // POI ID
-                    "name": "苏州中心商场",           // POI 名称
-                    "desc": "较拥挤",
-                    "iconWidth":120,
-                    "iconHeight":120,
-                    "height": 53.930321,                // POI 点高程，单位米
-                    "detailUrl": popupUrl + "location2.html",  // 展示详细信息的web页面 （可选属性，值可为NULL）
+                    "name": "星塘街",           // POI 名称
+                    "desc": "",
+                    "iconWidth":128,
+                    "iconHeight":100,
+                    "height": 5,                // POI 点高程，单位米
+                    "detailUrl": "",  // 展示详细信息的web页面 （可选属性，值可为NULL）
                     "heading": 90,                  // 定位时偏航角（可选属性，值可为NULL），单位度
                     "pitch": -21,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
                     "distance": 123.5,          // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
@@ -241,34 +242,16 @@ $("#addPOIFeature").click(function () {
                 },
                 "geometry": {
                     "type": "Point",
-                    "coordinates": [120.673454, 31.31842]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location3",            // POI ID
-                    "name": "中茵皇冠假日酒店",           // POI 名称
-                    "desc": "舒适",
-                    "height": 37.237129,                // POI 点高程，单位米
-                    "detailUrl": popupUrl + "location3.html",   // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 180,                  // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -29,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 623.5,          // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
-                },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.678711, 31.324223]
+                    "coordinates": [120.7397093029,31.3276638620]
                 }
             },
             {
                 "type": "Feature",
                 "properties": {
                     "id": "location4",            // POI ID
-                    "name": "桃花岛",           // POI 名称
-                    "desc": "舒适",
-                    "height": 37.237129,                // POI 点高程，单位米
+                    "name": "龙墩站",           // POI 名称
+                    "desc": "",
+                    "height": 10,                // POI 点高程，单位米
                     "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
                     "heading": 270,                  // 定位时偏航角（可选属性，值可为NULL），单位度
                     "pitch": -20,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
@@ -277,99 +260,27 @@ $("#addPOIFeature").click(function () {
                 },
                 "geometry": {
                     "type": "Point",
-                    "coordinates": [120.687958, 31.321032]
+                    "coordinates": [120.7434026850,31.3373957839]
                 }
             },
             {
                 "type": "Feature",
                 "properties": {
-                    "id": "location5",            // POI ID
-                    "name": "文化艺术中心",           // POI 名称
-                    "desc": "舒适",
-                    "height": 25.56336,           // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 360,                  // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -17,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 623.5,             // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
-                },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.697594, 31.323679]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location6",            // POI ID
-                    "name": "月光码头",           // POI 名称
-                    "desc": "舒适",
-                    "height": 25.56336,           // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 90,                // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -28,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 623.5,            // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
-                },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.700699, 31.321997]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location7",            // POI ID
-                    "name": "国际博览中心",           // POI 名称
-                    "desc": "舒适",
-                    "height": 22.911165,           // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 90,                // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -18,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
+                    "id": "location3",            // POI ID
+                    "name": "东沙湖站",           // POI 名称
+                    "desc": "",
+                    "height": 10,                // POI 点高程，单位米
+                    "detailUrl": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fss2.meipian.me%2Fusers%2F31609650%2F44ea39c234d544da9d65d4dad1fefe70.jpg%3Fmeipian-raw%2Fbucket%2Fivwen%2Fkey%2FdXNlcnMvMzE2MDk2NTAvNDRlYTM5YzIzNGQ1NDRkYTlkNjVkNGRhZDFmZWZlNzAuanBn%2Fsign%2F939bcef6f50825e1a085b7f6443bfe40.jpg&refer=http%3A%2F%2Fss2.meipian.me&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1682575393&t=16af5847f67b2fb757205adff018bdfb",   // 展示详细信息的web页面 （可选属性，值可为NULL）
+                    "heading": 180,                  // 定位时偏航角（可选属性，值可为NULL），单位度
+                    "pitch": -29,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
                     "distance": 623.5,          // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
                     "time": 3,                    // 定位飞行时间（可选属性）
                 },
                 "geometry": {
                     "type": "Point",
-                    "coordinates": [120.702293, 31.325665]
+                    "coordinates": [120.7588425350,31.3397538874]
                 }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location8",            // POI ID
-                    "name": "国金中心",           // POI 名称
-                    "desc": "舒适",
-                    "height": 5.544312,           // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 90,                // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -30,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 223.5,               // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
-                },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.71283, 31.323914]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "id": "location9",            // POI ID
-                    "name": "奥林匹克体育中心",           // POI 名称
-                    "desc": "较拥挤",
-                    "height": 5.27029,           // POI 点高程，单位米
-                    "detailUrl": null,  // 展示详细信息的web页面 （可选属性，值可为NULL）
-                    "heading": 90,                // 定位时偏航角（可选属性，值可为NULL），单位度
-                    "pitch": -22,                    // 定位时俯仰角（可选属性，值可为NULL），单位度
-                    "distance": 416.802,               // 定位时相机距离地图中心点距离（可选属性，值可为NULL），单位米
-                    "time": 3,                    // 定位飞行时间（可选属性）
-                },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [120.746452, 31.306192]
-                }
-            },
+            }
         ]
     }
 
@@ -378,82 +289,47 @@ $("#addPOIFeature").click(function () {
             "property": "name",             // 用于区分类型的属性名
             "style": [
                 {
-                    "value": "东方之门",     // 类型枚举值
+                    "value": "方州公园站",     // 类型枚举值
                     "color": "#F03B71",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "iconWidth":150,
-                    "iconHeight":50,
+                    "iconImage": "https://bkimg.cdn.bcebos.com/pic/0df3d7ca7bcb0a46f21f82d48531e1246b600d330199?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5",  // 该类型POI 图标
+                    "iconWidth":128,
+                    "iconHeight":100,
                     "layout": {              // poi详情页面的宽高
-                        "width": 578,
-                        "height": 214
+                        "width": 440,
+                        "height": 150
                     }
-                }, {
-                    "value": "苏州中心商场",     // 类型枚举值
+                }, 
+                {
+                    "value": "星塘街",     // 类型枚举值
                     "color": "#048A00",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/gouwu.png",  // 该类型POI 图标
-                    "labelWidth":300,
-                    "iconRotation":45,
+                    "iconImage": "https://bkimg.cdn.bcebos.com/pic/42166d224f4a20a44623ccd6cc008f22720e0cf37add?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5",  // 该类型POI 图标
                     "iconWidth":120,
                     "iconHeight":120,
                     "layout": {              // poi详情页面的宽高
                         "width": 440,
                         "height": 150
                     }
-                }, {
-                    "value": "中茵皇冠假日酒店",     // 类型枚举值
+                }, 
+                {
+                    "value": "龙墩站",     // 类型枚举值
                     "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/gouwu.png",  // 该类型POI 图标
+                    "iconImage": "https://bkimg.cdn.bcebos.com/pic/6a63f6246b600c338744a925f41e460fd9f9d62a0b99?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5",  // 该类型POI 图标
+                    "iconWidth":128,
+                    "iconHeight":100,
                     "layout": {              // poi详情页面的宽高
                         "width": 440,
                         "height": 150
                     }
-                }, {
-                    "value": "桃花岛",     // 类型枚举值
+                }, 
+                {
+                    "value": "东沙湖站",     // 类型枚举值
                     "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
+                    "iconImage": "https://bkimg.cdn.bcebos.com/pic/3801213fb80e7bec54e74e0cc17cae389b504ec23d99?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5",  // 该类型POI 图标
+                    "iconWidth":128,
+                    "iconHeight":100,
                     "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }, {
-                    "value": "文化艺术中心",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }, {
-                    "value": "月光码头",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }, {
-                    "value": "国际博览中心",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }, {
-                    "value": "国金中心",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/gouwu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
-                    }
-                }, {
-                    "value": "奥林匹克体育中心",     // 类型枚举值
-                    "color": "#ff9900",      // 该类型POI主题色，表现为引线颜色
-                    "iconImage": "http://192.168.34.213:8888/SIPSD/icon/jingqu.png",  // 该类型POI 图标
-                    "layout": {              // poi详情页面的宽高
-                        "width": 40,
-                        "height": 50
+                        "width": 440,
+                        "height": 150
                     }
                 }
             ]
