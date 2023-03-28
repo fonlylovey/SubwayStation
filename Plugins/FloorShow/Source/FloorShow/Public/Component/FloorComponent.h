@@ -7,6 +7,22 @@
 #include "Components/TimelineComponent.h"
 #include "FloorComponent.generated.h"
 
+USTRUCT(BlueprintType)
+struct FMaterialArray
+{
+	GENERATED_BODY()
+
+public:
+	FMaterialArray(){};
+	
+	FMaterialArray(TArray<UMaterialInterface*> NewMaterialArray)
+	{
+		MaterialArray == NewMaterialArray;
+	};
+	
+	UPROPERTY(BlueprintReadOnly)
+	TArray<UMaterialInterface*> MaterialArray;
+};
 
 /**
  * 楼层组件
@@ -68,7 +84,7 @@ private:
 	//当前透明参数值
 	float CurTranspParamValue;
 	//当前使用的材质参数集
-	UMaterialParameterCollection* CurCollection;
+	UMaterialParameterCollection* CurCollection = nullptr;
 
 	/**************楼层移动相关**************/
 	//楼层原始位置
@@ -85,6 +101,10 @@ private:
 	UTimelineComponent* LiftLerpTimelineComp = nullptr;
 	UPROPERTY()
 	FOnTimelineFloat LiftLerpTickCallback;
+
+	/**************楼层材质相关**************/
+	UMaterialInstance* TranspMaterialInstance = nullptr;
+	TArray<FMaterialArray> OriginMaterials;
 
 protected:
 	// Called when the game starts
@@ -116,6 +136,29 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorComponent")
 	void FloorLift(bool bReverse, bool bLerp);
+
+	/**
+	 * 获取抬升位置
+	 */
+	UFUNCTION(BlueprintPure, Category = "FloorShow|FloorComponent")
+	FVector GetLiftLocation();
+
+	/**
+	 * 设置抬升位置
+	 *
+	 * @param NewLiftLocation 新的抬升高度
+	 */
+	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorComponent")
+	void SetLiftLocation(FVector NewLiftLocation);
+
+	/**
+	 * 将此楼层设置为半透明
+	 *
+	 * @param bReverse				是否恢复为正常材质
+	 * @param TransParencyMaterial	透明材质，若为 nullptr 则使用默认透明材质
+	 */
+	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorComponent")
+	void SetAsTransparency(bool bReverse, UMaterialInstance* TransParencyMaterial);
 
 private:
 	/**

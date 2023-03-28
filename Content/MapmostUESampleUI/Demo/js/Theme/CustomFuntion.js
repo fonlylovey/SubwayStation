@@ -43,7 +43,7 @@ $("#goodNight").click(function () {
 })
 
 
-//抬升负一层
+//展示负一层
 $("#LiftB1").click(function () {
     let options = {
         "functionName": "FloorLift",
@@ -53,9 +53,14 @@ $("#LiftB1").click(function () {
         }
     }
     mapmostUE.customFunction(options);
+    mapmostUE.flyTo({
+        "location":[120.74404843296949, 31.336627710197384, 112.20214479630758],
+        "rotation": [0,-34.30305480957031,-128.84765625],
+        "time":1
+    });
 })
 
-//抬升负二层
+//展示负二层
 $("#LiftB2").click(function () {
     let options = {
         "functionName": "FloorLift",
@@ -65,6 +70,77 @@ $("#LiftB2").click(function () {
         }
     }
     mapmostUE.customFunction(options);
+    mapmostUE.flyTo({
+        "location":[120.74367087719709, 31.336558215785985, 130.62407016963746],
+        "rotation": [0,-41.003055572509766,-116.54766082763672],
+        "time":1
+    });
+})
+
+//还原楼层抬升
+$("#ReverseBuildingLift").click(function () {
+    let options = {
+        "functionName": "ReverseLiftBuilding",
+        "params": {
+            "buildingName": "Station"
+        }
+    }
+    mapmostUE.customFunction(options);
+    mapmostUE.flyTo({
+        "location":[120.74367087719709, 31.336558215785985, 130.62407016963746],
+        "rotation": [0,-41.003055572509766,-116.54766082763672],
+        "time":1
+    });
+})
+
+//突出展示负一层
+$("#HighlightB1").click(function () {
+    let options = {
+        "functionName": "Highlight",
+        "params": {
+            "buildingName": "Station",
+            "floorIndex": -1
+        }
+    }
+    mapmostUE.customFunction(options);
+    mapmostUE.flyTo({
+        "location":[120.74404843296949, 31.336627710197384, 112.20214479630758],
+        "rotation": [0,-34.30305480957031,-128.84765625],
+        "time":1
+    });
+})
+
+//突出展示负二层
+$("#HighlightB2").click(function () {
+    let options = {
+        "functionName": "Highlight",
+        "params": {
+            "buildingName": "Station",
+            "floorIndex": -2
+        }
+    }
+    mapmostUE.customFunction(options);
+    mapmostUE.flyTo({
+        "location":[120.74367087719709, 31.336558215785985, 130.62407016963746],
+        "rotation": [0,-41.003055572509766,-116.54766082763672],
+        "time":1
+    });
+})
+
+//还原楼层突出展示
+$("#ReverseHighlight").click(function () {
+    let options = {
+        "functionName": "ReverseHighlight",
+        "params": {
+            "buildingName": "Station"
+        }
+    }
+    mapmostUE.customFunction(options);
+    mapmostUE.flyTo({
+        "location":[120.74367087719709, 31.336558215785985, 130.62407016963746],
+        "rotation": [0,-41.003055572509766,-116.54766082763672],
+        "time":1
+    });
 })
 
 $("#addAnimationPath").click(function () {
