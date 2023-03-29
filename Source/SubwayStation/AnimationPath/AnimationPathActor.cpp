@@ -17,10 +17,10 @@ AAnimationPathActor::AAnimationPathActor()
 	MoveMesh->SetCollisionProfileName(UCollisionProfile::BlockAll_ProfileName);
 	MoveMesh->Mobility = EComponentMobility::Movable;
 	MoveMesh->bUseDefaultCollision = true;
-	MoveMesh->SetWorldScale3D(FVector3d(30, 30, 30));
+	MoveMesh->SetWorldScale3D(FVector3d(1, 1, 1));
 	
 	SkeMoveMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeMoveMesh"));
-	SkeMoveMesh->SetWorldScale3D(FVector3d(50, 50, 50));
+	SkeMoveMesh->SetWorldScale3D(FVector3d(1, 1, 1));
 	
 	MovePath = CreateDefaultSubobject<USplineComponent>(TEXT("MovePath"));
 	MovePath->SetupAttachment(RootComponent);
@@ -63,16 +63,23 @@ void AAnimationPathActor::InitData(const FAnimationPathData& data)
 			}
 		}
 	}
+
+	UAnimationAsset* animAsset = Cast<UAnimationAsset>(StaticLoadObject(UAnimationAsset::StaticClass(), nullptr, *data.AnimRefPath));
+	SkeMoveMesh->PlayAnimation(animAsset, true);
 	
 	MovePath->ClearSplinePoints();
 	for (int i = 0; i < data.KeyPoints.Num(); i++)
 	{
 		FSplinePoint keyPoint;
 		keyPoint.Position = data.KeyPoints[i];
+		keyPoint.LeaveTangent = FVector();
+		keyPoint.ArriveTangent = FVector();
 		keyPoint.InputKey = i;
+		keyPoint.Type = ESplinePointType::Linear;
 		MovePath->AddSplinePoint(data.KeyPoints[i], ESplineCoordinateSpace::World);
 	}
 	MovePath->UpdateSpline();
+	
 	MovePath->Duration = data.Duration;
 	if(MoveMesh != nullptr)
 	{

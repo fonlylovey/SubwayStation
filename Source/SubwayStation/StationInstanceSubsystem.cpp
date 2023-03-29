@@ -43,11 +43,12 @@ void UStationInstanceSubsystem::Fengya(const FString& jsonData)
 			data.Duration = paramsObj->GetNumberField(TEXT("Duration"));
 			data.IsLoop = paramsObj->GetBoolField(TEXT("IsLoop"));
 			data.MeshRefPath = paramsObj->GetStringField(TEXT("MeshRefPath"));
+			data.AnimRefPath = paramsObj->GetStringField(TEXT("AnimRefPath"));
 			auto keypoints = paramsObj->GetArrayField(TEXT("KeyPoints"));
 			for (auto JsonValue : keypoints)
 			{
 				auto item = JsonValue->AsArray();
-				FVector3d keyPoint = FVector3d(item[0]->AsNumber(), item[1]->AsNumber(), 0);
+				FVector3d keyPoint = FVector3d(item[0]->AsNumber(), item[1]->AsNumber(), item[2]->AsNumber());
 				data.KeyPoints.Add(Georeference->TransformLongitudeLatitudeHeightToUnreal(keyPoint));
 			}
 
