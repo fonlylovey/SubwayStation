@@ -63,16 +63,23 @@ void AAnimationPathActor::InitData(const FAnimationPathData& data)
 			}
 		}
 	}
+
+	UAnimationAsset* animAsset = Cast<UAnimationAsset>(StaticLoadObject(UAnimationAsset::StaticClass(), nullptr, *data.AnimRefPath));
+	SkeMoveMesh->PlayAnimation(animAsset, true);
 	
 	MovePath->ClearSplinePoints();
 	for (int i = 0; i < data.KeyPoints.Num(); i++)
 	{
 		FSplinePoint keyPoint;
 		keyPoint.Position = data.KeyPoints[i];
+		keyPoint.LeaveTangent = FVector();
+		keyPoint.ArriveTangent = FVector();
 		keyPoint.InputKey = i;
+		keyPoint.Type = ESplinePointType::Linear;
 		MovePath->AddSplinePoint(data.KeyPoints[i], ESplineCoordinateSpace::World);
 	}
 	MovePath->UpdateSpline();
+	
 	MovePath->Duration = data.Duration;
 	if(MoveMesh != nullptr)
 	{

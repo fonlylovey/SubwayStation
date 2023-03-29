@@ -151,7 +151,8 @@ $("#addAnimationPath").click(function () {
             "Name": "路径动画1",
             "Duration": 20,
             "IsLoop": false,
-            "MeshRefPath": "/Game/SM_MatPesh.SM_MatPesh",
+            "MeshRefPath": "SkeletalMesh'/Game/Models/Person/walk.walk'",
+            "AnimRefPath": "AnimSequence'/Game/Models/Person/walk_Anim.walk_Anim'",
             "KeyPoints": [
                 [120.7394622738,31.3419559124],
                 [120.7395138570,31.3368457234],
@@ -171,7 +172,8 @@ $("#addAnimationPath").click(function () {
             "Name": "路径动画2",
             "duration": 20,
             "IsLoop": true,
-            "MeshRefPath": "SkeletalMesh'/Game/TutorialTPP.TutorialTPP'",
+            "MeshRefPath": "SkeletalMesh'/Game/Models/Person/walk.walk'",
+            "AnimRefPath": "AnimSequence'/Game/Models/Person/walk_Anim.walk_Anim'",
             "KeyPoints": [
                 [120.7435100269,31.3372999038],
                 [120.7435697569,31.3337764706],

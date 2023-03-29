@@ -31,6 +31,9 @@ struct FAnimationPathData
 	FString MeshRefPath;
 
 	UPROPERTY(EditAnywhere)
+	FString AnimRefPath;
+
+	UPROPERTY(EditAnywhere)
 	FVector3d DefaultTranslate;
 
 	UPROPERTY(EditAnywhere)

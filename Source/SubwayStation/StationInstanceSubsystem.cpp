@@ -43,6 +43,7 @@ void UStationInstanceSubsystem::Fengya(const FString& jsonData)
 			data.Duration = paramsObj->GetNumberField(TEXT("Duration"));
 			data.IsLoop = paramsObj->GetBoolField(TEXT("IsLoop"));
 			data.MeshRefPath = paramsObj->GetStringField(TEXT("MeshRefPath"));
+			data.AnimRefPath = paramsObj->GetStringField(TEXT("AnimRefPath"));
 			auto keypoints = paramsObj->GetArrayField(TEXT("KeyPoints"));
 			for (auto JsonValue : keypoints)
 			{
