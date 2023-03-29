@@ -58,8 +58,10 @@ void UFloorInstanceSubsystem::Execute(const FString& Data)
 
 void UFloorInstanceSubsystem::FloorLift(const FString& BuildingName, const int32 FloorIndex)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 1000, FColor::Green, "FloorLift" + FString::FromInt(FloorIndex));
 	//增加第零层抬升高度
 	UFloorComponent* Component = GFloorManager->GetFloorComponent("Station", 0);
+	GEngine->AddOnScreenDebugMessage(-1, 1000, FColor::Green, "GetFloor: " + FString::FromInt(FloorIndex) + "Successful");
 	if (Component != nullptr)
 	{
 		Component->SetLiftLocation(FVector(Component->GetLiftLocation().X, Component->GetLiftLocation().Y, 4000));
