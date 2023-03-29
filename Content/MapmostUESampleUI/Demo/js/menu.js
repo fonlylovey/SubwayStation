@@ -99,6 +99,7 @@ const config = {
             "openMousePick": "开启地图拾取",
             "closeMousePick": "关闭地图拾取",
             "getCameraParameters": "获取相机参数",
+            "interruptFlyTo": "飞行中断",
             //"openMapStatusListen": "开启相机参数监听",
            // "closeMapStatusListen": "关闭相机参数监听",
             //"startQueryProperty": "开启三维对象查属性",

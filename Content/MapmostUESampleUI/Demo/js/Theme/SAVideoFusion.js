@@ -2,24 +2,25 @@
 $("#addSingleVideoFusion").click(function (){
     
     mapmostUE.flyTo({
-        "location":[120.74310714615599, 31.336815251714718, 256.4348184739662],
-        "rotation": [0,-67.90760803222656,-100.98565673828125],
+        "location":[120.74337479643435, 31.33742451006347, 17.047867964956584],
+        "rotation": [0,-24.003034591674805,-121.14765167236328],
         "time":2
     });
     
     mapmostUE.addVideoFusion({
-        cameraPosition : [120.74284117616449, 31.337583633518385, 210.24927729845976],
+        cameraPosition : [120.7433289574518, 31.337482505416883, 17.930048164076627],
         // cameraPosition: [120.739105, 31.305603,  61.201748],
-        fov: 80,
+        fov: 45,
         // cameraRotation:[ 0.673769,-12.545454,-13.387241],
-        cameraRotation:[ -12,-80,-90],
+        // cameraRotation:[ -12,-80,-90],
+        cameraRotation:[0, -24.003034591674805, -121.14765167236328],
         // url: "rtsp://192.168.34.87:554",
         // url: "http://localhost:4321/Demo/asset/aoti_video_fusion.mp4",
         // url: "http://192.168.34.213:8888/SIPSD/video/aoti_video_fusion.mp4",
         // url: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4",
         url: "rtsp://101.35.239.206/Video_1",
-        videoSize: [1920,1080],
-        far: 58606.800781,
+        videoSize: [720,404],
+        far: 1000,
         opacity: 1
     });
     
