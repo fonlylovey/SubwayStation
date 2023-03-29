@@ -17,10 +17,10 @@ AAnimationPathActor::AAnimationPathActor()
 	MoveMesh->SetCollisionProfileName(UCollisionProfile::BlockAll_ProfileName);
 	MoveMesh->Mobility = EComponentMobility::Movable;
 	MoveMesh->bUseDefaultCollision = true;
-	MoveMesh->SetWorldScale3D(FVector3d(30, 30, 30));
+	MoveMesh->SetWorldScale3D(FVector3d(1, 1, 1));
 	
 	SkeMoveMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeMoveMesh"));
-	SkeMoveMesh->SetWorldScale3D(FVector3d(50, 50, 50));
+	SkeMoveMesh->SetWorldScale3D(FVector3d(1, 1, 1));
 	
 	MovePath = CreateDefaultSubobject<USplineComponent>(TEXT("MovePath"));
 	MovePath->SetupAttachment(RootComponent);

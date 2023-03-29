@@ -163,16 +163,15 @@ $("#addAnimationPath").click(function () {
         "params": {
             "ID": "path_1",
             "Name": "路径动画1",
-            "Duration": 20,
-            "IsLoop": false,
+            "Duration": 40,
+            "IsLoop": true,
             "MeshRefPath": "SkeletalMesh'/Game/Models/Person/walk.walk'",
             "AnimRefPath": "AnimSequence'/Game/Models/Person/walk_Anim.walk_Anim'",
             "KeyPoints": [
-                [120.7394622738,31.3419559124],
-                [120.7395138570,31.3368457234],
-                [120.7513099404,31.3385938131],
-                [120.7510794799,31.3437421320],
-                [120.7274516590,31.3406029987]
+                [120.7427506555195, 31.33728067290611, 13.234],
+                [120.7425744437448, 31.33750574398771, 13.236],
+                [120.7425883088157, 31.33755464813915, 13.186],
+                [120.7431566802413, 31.33765077652371, 13.181]
             ]
         }
         
@@ -184,19 +183,116 @@ $("#addAnimationPath").click(function () {
         "params": {
             "ID": "path_2",
             "Name": "路径动画2",
-            "duration": 20,
+            "duration": 40,
             "IsLoop": true,
             "MeshRefPath": "SkeletalMesh'/Game/Models/Person/walk.walk'",
             "AnimRefPath": "AnimSequence'/Game/Models/Person/walk_Anim.walk_Anim'",
             "KeyPoints": [
-                [120.7435100269,31.3372999038],
-                [120.7435697569,31.3337764706],
-                [120.7396393429,31.3333710793],
-                [120.7396002445,31.3368052675],
+                [120.74326508468621, 31.33776951475288, 13.180],
+                [120.74254423319505, 31.33766189332061, 13.186],
+
             ]
         }
     }
     mapmostUE.customFunction(data1);
+
+    let data2 = {
+        "functionName": "addAnimationPath",
+        "params": {
+            "ID": "path_3",
+            "Name": "路径动画2",
+            "duration": 40,
+            "IsLoop": true,
+            "MeshRefPath": "SkeletalMesh'/Game/Models/Person/walk.walk'",
+            "AnimRefPath": "AnimSequence'/Game/Models/Person/walk_Anim.walk_Anim'",
+            "KeyPoints": [
+                [120.7425225841195, 31.33782422283047, 13.186],
+                [120.7425149027130, 31.33772412855159, 13.186],
+                [120.7425340631221, 31.33764213562643, 13.186],
+                [120.7432619306392, 31.33774552379088, 13.180]
+
+            ]
+        }
+    }
+    mapmostUE.customFunction(data2);
+
+    let data3 = {
+        "functionName": "addAnimationPath",
+        "params": {
+            "ID": "path_4",
+            "Name": "路径动画2",
+            "duration": 40,
+            "IsLoop": true,
+            "MeshRefPath": "SkeletalMesh'/Game/Models/Person/walk.walk'",
+            "AnimRefPath": "AnimSequence'/Game/Models/Person/walk_Anim.walk_Anim'",
+            "KeyPoints": [
+                [120.74257492943306, 31.337563312936012, 13.186],
+                [120.74303027191446, 31.337639003581636, 13.182],
+                [120.74309199173739, 31.337666811949433, 13.331],
+                [120.74320634082872, 31.33768409920138, 8.231]
+
+            ]
+        }
+    }
+    mapmostUE.customFunction(data3);
+
+    let data4 = {
+        "functionName": "addAnimationPath",
+        "params": {
+            "ID": "path_5",
+            "Name": "路径动画2",
+            "duration": 40,
+            "IsLoop": true,
+            "MeshRefPath": "SkeletalMesh'/Game/Models/Person/walk.walk'",
+            "AnimRefPath": "AnimSequence'/Game/Models/Person/walk_Anim.walk_Anim'",
+            "KeyPoints": [
+                [120.7429380415336, 31.337673611164988, 10.033],
+                [120.7428860460765, 31.337664454462548, 11.683],
+                [120.7428949194115, 31.33762511043883, 13.683],
+                [120.7428661254896, 31.33761363441977, 13.183],
+                [120.7426474479523, 31.337578271709877, 13.185]
+
+            ]
+        }
+    }
+    mapmostUE.customFunction(data4);
+
+    let data5 = {
+        "functionName": "addAnimationPath",
+        "params": {
+            "ID": "path_6",
+            "Name": "路径动画2",
+            "duration": 40,
+            "IsLoop": true,
+            "MeshRefPath": "SkeletalMesh'/Game/Models/Person/walk.walk'",
+            "AnimRefPath": "AnimSequence'/Game/Models/Person/walk_Anim.walk_Anim'",
+            "KeyPoints": [
+                [120.74362987206997, 31.337491369399263, 22.717],
+                [120.7433415884246, 31.33744962316777, 13.229],
+                [120.7432846676496, 31.337673783687954, 13.180]
+
+            ]
+        }
+    }
+    mapmostUE.customFunction(data5);
+
+    let data6 = {
+        "functionName": "addAnimationPath",
+        "params": {
+            "ID": "path_7",
+            "Name": "路径动画2",
+            "duration": 40,
+            "IsLoop": true,
+            "MeshRefPath": "SkeletalMesh'/Game/Models/Person/walk.walk'",
+            "AnimRefPath": "AnimSequence'/Game/Models/Person/walk_Anim.walk_Anim'",
+            "KeyPoints": [
+                [120.74261555096726, 31.3376492212469, 13.185],
+                [120.74323083533194, 31.3377528812205, 13.180]
+
+            ]
+        }
+    }
+    mapmostUE.customFunction(data6);
 
 })
 

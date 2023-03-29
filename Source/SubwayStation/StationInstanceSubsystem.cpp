@@ -48,7 +48,7 @@ void UStationInstanceSubsystem::Fengya(const FString& jsonData)
 			for (auto JsonValue : keypoints)
 			{
 				auto item = JsonValue->AsArray();
-				FVector3d keyPoint = FVector3d(item[0]->AsNumber(), item[1]->AsNumber(), 0);
+				FVector3d keyPoint = FVector3d(item[0]->AsNumber(), item[1]->AsNumber(), item[2]->AsNumber());
 				data.KeyPoints.Add(Georeference->TransformLongitudeLatitudeHeightToUnreal(keyPoint));
 			}
 
