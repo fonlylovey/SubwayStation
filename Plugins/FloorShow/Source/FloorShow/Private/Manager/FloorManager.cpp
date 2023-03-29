@@ -51,6 +51,15 @@ TArray<AActor*> UFloorManager::GetBuildingArray(const FString& BuildingName)
 	FBuilding BuildingStruct = GetBuilding(BuildingName);
 	TArray<AActor*> BuildingArray;
 	BuildingStruct.FloorMap.GenerateValueArray(BuildingArray);
+
+	int32 BuildingArrNum = BuildingArray.Num();
+	for (int32 i = 0; i < BuildingArrNum; i++)
+	{
+		TArray<AActor*> TempFloor;
+		BuildingArray[i]->GetAttachedActors(TempFloor, true, true);
+		BuildingArray.Append(TempFloor);
+	}
+	
 	return BuildingArray;
 }
 
@@ -86,6 +95,15 @@ AActor* UFloorManager::GetFloor(const FString& BuildingName, int32 FloorIndex)
 	}
 
 	return nullptr;
+}
+
+TArray<AActor*> UFloorManager::GetFloorWithAttached(const FString& BuildingName, int32 FloorIndex)
+{
+	AActor* Floor = GetFloor(BuildingName, FloorIndex);
+	TArray<AActor*> AttachedActors;
+	Floor->GetAttachedActors(AttachedActors, true, true);
+	AttachedActors.Add(Floor);
+	return AttachedActors;
 }
 
 UFloorComponent* UFloorManager::GetFloorComponent(const FString& BuildingName, int32 FloorIndex)
@@ -190,29 +208,29 @@ void UFloorManager::SetBuilldingHidden(const FString& BuildingName, bool bNewHid
 
 void UFloorManager::SetFloorHidden(const FString& BuildingName, int32 FloorIndex, bool bNewHidden)
 {
-	AActor* Floor = GetFloor(BuildingName, FloorIndex);
-	if (Floor != nullptr)
+	TArray<AActor*> Floor = GetFloorWithAttached(BuildingName, FloorIndex);
+	for (auto& Itr : Floor)
 	{
-		Floor->SetActorHiddenInGame(bNewHidden);
+		Itr->SetActorHiddenInGame(bNewHidden);
 	}
 }
 
-void UFloorManager::LiftBuilding(const FString& BuildingName, bool bReverse, bool bLerp)
+void UFloorManager::LiftBuilding(const FString& BuildingName, bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished)
 {
 	TArray<UFloorComponent*> FloorComponents = GetBuildingComponentArray(BuildingName);
 
 	for (auto& Itr : FloorComponents)
 	{
-		Itr->FloorLift(bReverse, bLerp);
+		Itr->FloorLift(bReverse, bLerp, OnTimelineFinished);
 	}
 }
 
-void UFloorManager::ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp)
+void UFloorManager::ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished)
 {
 	TArray<UFloorComponent*> Components = GetFloorComponentHigher(BuildingName, FloorIndex);
 	for (auto& Itr : Components)
 	{
-		Itr->FloorLift(bReverse, bLerp);
+		Itr->FloorLift(bReverse, bLerp, OnTimelineFinished);
 	}
 }
 

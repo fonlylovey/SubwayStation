@@ -101,6 +101,8 @@ private:
 	UTimelineComponent* LiftLerpTimelineComp = nullptr;
 	UPROPERTY()
 	FOnTimelineFloat LiftLerpTickCallback;
+	UPROPERTY()
+	FOnTimelineEvent LiftLerpFinished;
 
 	/**************楼层材质相关**************/
 	UMaterialInstance* TranspMaterialInstance = nullptr;
@@ -135,7 +137,7 @@ public:
 	 * 楼层抬升
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorComponent")
-	void FloorLift(bool bReverse, bool bLerp);
+	void FloorLift(bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished);
 
 	/**
 	 * 获取抬升位置
@@ -178,4 +180,10 @@ private:
 	 */
 	UFUNCTION()
 	void OnLiftLerpUpdate(float Alpha);
+
+	/**
+	 * 楼层抬升结束
+	 */
+	UFUNCTION()
+	void OnLiftLerpFinished();
 };
