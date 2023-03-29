@@ -3,7 +3,6 @@
 
 #include "Manager/FloorManager.h"
 
-#include "HeadMountedDisplayTypes.h"
 #include "Component/FloorComponent.h"
 #include "DSP/BufferOnePoleLPF.h"
 #include "Kismet/GameplayStatics.h"
