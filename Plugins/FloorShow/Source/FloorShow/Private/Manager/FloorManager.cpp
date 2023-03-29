@@ -228,6 +228,13 @@ void UFloorManager::LiftBuilding(const FString& BuildingName, bool bReverse, boo
 void UFloorManager::ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp, bool bHidden)
 {
 	TArray<UFloorComponent*> Components = GetFloorComponentHigher(BuildingName, FloorIndex);
+	
+	UFloorComponent* ReverseComponent = GetFloorComponent(BuildingName, FloorIndex);
+	if (ReverseComponent != nullptr)
+	{
+		ReverseComponent->FloorLift(true, bLerp, false);	
+	}
+	
 	for (auto& Itr : Components)
 	{
 		Itr->FloorLift(bReverse, bLerp, bHidden);

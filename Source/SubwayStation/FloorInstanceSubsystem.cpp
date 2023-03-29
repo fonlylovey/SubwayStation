@@ -95,6 +95,7 @@ void UFloorInstanceSubsystem::FloorLift(const FString& BuildingName, const int32
 
 void UFloorInstanceSubsystem::ReverseLiftBuilding(const FString& BuildingName)
 {
+	GFloorManager->SetBuilldingHidden(BuildingName, false);
 	//还原楼层位置楼层
 	GFloorManager->LiftBuilding(BuildingName, true, true, false);
 	//设置物体透明渐变
