@@ -215,7 +215,7 @@ $('#turnDown').click(function(){
 })
 
 // 开启地图拾取
-$('#setOnMousePickListener').click(function(){
+$('#openMousePick').click(function(){
     mapmostUE.setOnMousePickListener(function (response){
         console.log(response);
         let {modelName, hitLocation} = response;
@@ -245,7 +245,7 @@ $('#setOnMousePickListener').click(function(){
 })
 
 // 关闭地图拾取
-$('#removeOnMousePickListener').click(function(){
+$('#closeMousePick').click(function(){
     mapmostUE.removeOnMousePickListener();
 })
 
