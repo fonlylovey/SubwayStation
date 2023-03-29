@@ -88,7 +88,9 @@ void UFloorComponent::BeginPlay()
 
 	//楼层抬升时间轴初始化
 	LiftLerpTickCallback.BindUFunction(this, TEXT("OnLiftLerpUpdate"));
+	LiftLerpFinished.BindUFunction(this, TEXT("OnLiftLerpFinished"));
 	LiftLerpTimelineComp->AddInterpFloat(LiftLerpCurve, LiftLerpTickCallback, NAME_None, FName(TEXT("LiftLerpTrack")));
+	LiftLerpTimelineComp->SetTimelineFinishedFunc(LiftLerpFinished);
 }
 
 
@@ -134,7 +136,7 @@ void UFloorComponent::SetTransparent(FName ParameterName, float Transparency, bo
 	}
 }
 
-void UFloorComponent::FloorLift(bool bReverse, bool bLerp)
+void UFloorComponent::FloorLift(bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished)
 {
 	CurLocation = OwnerActor->GetActorLocation();
 	if (bLerp)
@@ -149,6 +151,7 @@ void UFloorComponent::FloorLift(bool bReverse, bool bLerp)
 			
 		}
 		LiftLerpTimelineComp->PlayFromStart();
+		LiftLerpTimelineComp->SetTimelineFinishedFunc(OnTimelineFinished);
 	}
 	else
 	{
@@ -211,5 +214,10 @@ void UFloorComponent::OnTranspLerpUpdate(float Alpha)
 void UFloorComponent::OnLiftLerpUpdate(float Alpha)
 {
 	OwnerActor->SetActorLocation(UKismetMathLibrary::VLerp(CurLocation, TargetLocation, Alpha));
+}
+
+void UFloorComponent::OnLiftLerpFinished()
+{
+	
 }
 

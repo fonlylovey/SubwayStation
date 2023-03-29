@@ -14,6 +14,12 @@ class SUBWAYSTATION_API UFloorInstanceSubsystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 
+private:
+	TQueue<int32> LiftFloorQueue;
+
+	UFUNCTION()
+	void FloorLiftFinished();
+	
 public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual void Deinitialize() override;

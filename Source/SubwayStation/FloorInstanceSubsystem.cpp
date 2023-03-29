@@ -7,6 +7,16 @@
 #include "Manager/FloorManager.h"
 #include "Singleton/GameSingleton.h"
 
+void UFloorInstanceSubsystem::FloorLiftFinished()
+{
+	if (!LiftFloorQueue.IsEmpty())
+	{
+		int32 FloorIndex;
+		LiftFloorQueue.Dequeue(FloorIndex);
+		GFloorManager->SetFloorHidden("Station", FloorIndex + 1, true);
+	}
+}
+
 void UFloorInstanceSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
@@ -58,17 +68,30 @@ void UFloorInstanceSubsystem::Execute(const FString& Data)
 
 void UFloorInstanceSubsystem::FloorLift(const FString& BuildingName, const int32 FloorIndex)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1000, FColor::Green, "FloorLift" + FString::FromInt(FloorIndex));
-	//增加第零层抬升高度
-	UFloorComponent* Component = GFloorManager->GetFloorComponent("Station", 0);
-	GEngine->AddOnScreenDebugMessage(-1, 1000, FColor::Green, "GetFloor: " + FString::FromInt(FloorIndex) + "Successful");
-	if (Component != nullptr)
+	// GEngine->AddOnScreenDebugMessage(-1, 1000, FColor::Green, "FloorLift" + FString::FromInt(FloorIndex));
+	//修改第零层抬升高度
+	UFloorComponent* Component_Zero = GFloorManager->GetFloorComponent("Station", 0);
+	// GEngine->AddOnScreenDebugMessage(-1, 1000, FColor::Green, "GetFloor: " + FString::FromInt(FloorIndex) + "Successful");
+	if (Component_Zero != nullptr)
 	{
-		Component->SetLiftLocation(FVector(Component->GetLiftLocation().X, Component->GetLiftLocation().Y, 4000));
-	}	
+		Component_Zero->SetLiftLocation(FVector(Component_Zero->GetLiftLocation().X, Component_Zero->GetLiftLocation().Y, 15000));
+	}
 
+	//修改负一层抬升高度
+	UFloorComponent* Component_B1 = GFloorManager->GetFloorComponent("Station", -1);
+	// GEngine->AddOnScreenDebugMessage(-1, 1000, FColor::Green, "GetFloor: " + FString::FromInt(FloorIndex) + "Successful");
+	if (Component_B1 != nullptr)
+	{
+		Component_B1->SetLiftLocation(FVector(Component_B1->GetLiftLocation().X, Component_B1->GetLiftLocation().Y, 15000));
+	}
+
+	
+	LiftFloorQueue.Enqueue(FloorIndex);
+	FOnTimelineEvent FinishedEvent;
+	FinishedEvent.BindUFunction(this, TEXT("FloorLiftFinished"));
+	
 	//移动楼层
-	GFloorManager->ShowFloor(BuildingName, FloorIndex, false, true);
+	GFloorManager->ShowFloor(BuildingName, FloorIndex, false, true, FinishedEvent);
 	
 	//设置物体透明渐变
 	// GFloorManager->SetFloorTransparent(BuildingName, FloorIndex, TEXT("Transparency"), 0, true);
@@ -76,8 +99,9 @@ void UFloorInstanceSubsystem::FloorLift(const FString& BuildingName, const int32
 
 void UFloorInstanceSubsystem::ReverseLiftBuilding(const FString& BuildingName)
 {
+	GFloorManager->SetBuilldingHidden(BuildingName, false);
 	//还原楼层位置楼层
-	GFloorManager->LiftBuilding(BuildingName, true, true);
+	GFloorManager->LiftBuilding(BuildingName, true, true, FOnTimelineEvent());
 	//设置物体透明渐变
 	// GFloorManager->SetBuildingTransparent(BuildingName, TEXT("Transparency"), 1, true);
 }
