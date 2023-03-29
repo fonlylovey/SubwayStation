@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Singleton/SingletonAttribute.h"
+#include "Components/TimelineComponent.h"
 #include "FloorManager.generated.h"
 
 /**
@@ -102,6 +103,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "FloorShow|FloorManager")
 	AActor* GetFloor(const FString& BuildingName, int32 FloorIndex);
 
+	UFUNCTION(BlueprintPure, Category = "FloorShow|FloorManager")
+	TArray<AActor*> GetFloorWithAttached(const FString& BuildingName, int32 FloorIndex);
+
 	/**
 	 * 获取楼层组件
 	 *
@@ -188,7 +192,7 @@ public:
 	 * @param bLerp				是否启用过渡
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorManager")
-	void LiftBuilding(const FString& BuildingName, bool bReverse, bool bLerp);
+	void LiftBuilding(const FString& BuildingName, bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished);
 
 	/**
 	 * 楼层抬升
@@ -199,7 +203,7 @@ public:
 	 * @param bLerp				是否启用过渡
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorManager")
-	void ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp);
+	void ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished);
 
 	/**
 	 * 突出展示某一层

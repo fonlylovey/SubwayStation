@@ -2,25 +2,34 @@
 $("#addSingleVideoFusion").click(function (){
     
     mapmostUE.flyTo({
-        "location":[120.74337479643435, 31.33742451006347, 17.047867964956584],
-        "rotation": [0,-24.003034591674805,-121.14765167236328],
+        "location":[120.74335462851799, 31.337454476046506, 16.465953156856273],
+        "rotation": [0,-32.50303268432617,-122.24765014648438],
         "time":2
     });
+
+    let options = {
+        "functionName": "FloorLift",
+        "params": {
+            "buildingName": "Station",
+            "floorIndex": -1
+        }
+    }
+    mapmostUE.customFunction(options);
     
     mapmostUE.addVideoFusion({
-        cameraPosition : [120.7433289574518, 31.337482505416883, 17.930048164076627],
+        cameraPosition : [120.7433741116682, 31.33743987468373, 15.930048164076627],
         // cameraPosition: [120.739105, 31.305603,  61.201748],
-        fov: 45,
+        fov: 60,
         // cameraRotation:[ 0.673769,-12.545454,-13.387241],
         // cameraRotation:[ -12,-80,-90],
-        cameraRotation:[0, -24.003034591674805, -121.14765167236328],
+        cameraRotation:[-4.060542, -19.504357, -128.516378],
         // url: "rtsp://192.168.34.87:554",
         // url: "http://localhost:4321/Demo/asset/aoti_video_fusion.mp4",
         // url: "http://192.168.34.213:8888/SIPSD/video/aoti_video_fusion.mp4",
         // url: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4",
         url: "rtsp://101.35.239.206/Video_1",
         videoSize: [720,404],
-        far: 1000,
+        far: 2000,
         opacity: 1
     });
     
@@ -28,7 +37,21 @@ $("#addSingleVideoFusion").click(function (){
 
 // 删除单路视频融合
 $("#removeSingleVideoFusion").click(function (){
+    mapmostUE.flyTo({
+        "location":[120.74299731904654, 31.336789226405084, 178.17264187069452],
+        "rotation": [0,-60.79999923706055,-100.4000015258789],
+        "time":2
+    });
+
     mapmostUE.removeVideoFusion()
+
+    let options = {
+        "functionName": "ReverseLiftBuilding",
+        "params": {
+            "buildingName": "Station"
+        }
+    }
+    mapmostUE.customFunction(options);
 })
 
 
