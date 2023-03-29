@@ -96,6 +96,7 @@ private:
 	FVector CurLocation;
 	//目标移动位置
 	FVector TargetLocation;
+	bool bFinishedHidden = false;
 	//楼层抬升时间轴
 	UPROPERTY()
 	UTimelineComponent* LiftLerpTimelineComp = nullptr;
@@ -137,7 +138,7 @@ public:
 	 * 楼层抬升
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorComponent")
-	void FloorLift(bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished);
+	void FloorLift(bool bReverse, bool bLerp, bool bHidden);
 
 	/**
 	 * 获取抬升位置

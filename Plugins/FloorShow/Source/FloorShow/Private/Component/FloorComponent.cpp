@@ -136,9 +136,10 @@ void UFloorComponent::SetTransparent(FName ParameterName, float Transparency, bo
 	}
 }
 
-void UFloorComponent::FloorLift(bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished)
+void UFloorComponent::FloorLift(bool bReverse, bool bLerp, bool bHidden)
 {
 	CurLocation = OwnerActor->GetActorLocation();
+	bFinishedHidden = bHidden;
 	if (bLerp)
 	{
 		if (bReverse)
@@ -151,7 +152,6 @@ void UFloorComponent::FloorLift(bool bReverse, bool bLerp, FOnTimelineEvent OnTi
 			
 		}
 		LiftLerpTimelineComp->PlayFromStart();
-		LiftLerpTimelineComp->SetTimelineFinishedFunc(OnTimelineFinished);
 	}
 	else
 	{
@@ -218,6 +218,6 @@ void UFloorComponent::OnLiftLerpUpdate(float Alpha)
 
 void UFloorComponent::OnLiftLerpFinished()
 {
-	
+		GFloorManager->SetFloorHidden(BuildingName, FloorIndex, bFinishedHidden);
 }
 

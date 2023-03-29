@@ -192,7 +192,7 @@ public:
 	 * @param bLerp				是否启用过渡
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorManager")
-	void LiftBuilding(const FString& BuildingName, bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished);
+	void LiftBuilding(const FString& BuildingName, bool bReverse, bool bLerp, bool bHidden);
 
 	/**
 	 * 楼层抬升
@@ -203,7 +203,7 @@ public:
 	 * @param bLerp				是否启用过渡
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FloorShow|FloorManager")
-	void ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished);
+	void ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp, bool bHidden);
 
 	/**
 	 * 突出展示某一层

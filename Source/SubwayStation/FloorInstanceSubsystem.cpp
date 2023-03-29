@@ -7,15 +7,16 @@
 #include "Manager/FloorManager.h"
 #include "Singleton/GameSingleton.h"
 
-void UFloorInstanceSubsystem::FloorLiftFinished()
-{
-	if (!LiftFloorQueue.IsEmpty())
-	{
-		int32 FloorIndex;
-		LiftFloorQueue.Dequeue(FloorIndex);
-		GFloorManager->SetFloorHidden("Station", FloorIndex + 1, true);
-	}
-}
+// void UFloorInstanceSubsystem::FloorLiftFinished()
+// {
+// 	if (!LiftFloorQueue.IsEmpty())
+// 	{
+// 		int32 FloorIndex;
+// 		LiftFloorQueue.Dequeue(FloorIndex);
+// 		UE_LOG(LogTemp, Warning, TEXT("Lift_1111111111111111111111111"));
+// 		GFloorManager->SetFloorHidden("Station", FloorIndex + 1, true);
+// 	}
+// }
 
 void UFloorInstanceSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -84,14 +85,9 @@ void UFloorInstanceSubsystem::FloorLift(const FString& BuildingName, const int32
 	{
 		Component_B1->SetLiftLocation(FVector(Component_B1->GetLiftLocation().X, Component_B1->GetLiftLocation().Y, 15000));
 	}
-
-	
-	LiftFloorQueue.Enqueue(FloorIndex);
-	FOnTimelineEvent FinishedEvent;
-	FinishedEvent.BindUFunction(this, TEXT("FloorLiftFinished"));
 	
 	//移动楼层
-	GFloorManager->ShowFloor(BuildingName, FloorIndex, false, true, FinishedEvent);
+	GFloorManager->ShowFloor(BuildingName, FloorIndex, false, true, true);
 	
 	//设置物体透明渐变
 	// GFloorManager->SetFloorTransparent(BuildingName, FloorIndex, TEXT("Transparency"), 0, true);
@@ -99,9 +95,8 @@ void UFloorInstanceSubsystem::FloorLift(const FString& BuildingName, const int32
 
 void UFloorInstanceSubsystem::ReverseLiftBuilding(const FString& BuildingName)
 {
-	GFloorManager->SetBuilldingHidden(BuildingName, false);
 	//还原楼层位置楼层
-	GFloorManager->LiftBuilding(BuildingName, true, true, FOnTimelineEvent());
+	GFloorManager->LiftBuilding(BuildingName, true, true, false);
 	//设置物体透明渐变
 	// GFloorManager->SetBuildingTransparent(BuildingName, TEXT("Transparency"), 1, true);
 }

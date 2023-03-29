@@ -215,22 +215,22 @@ void UFloorManager::SetFloorHidden(const FString& BuildingName, int32 FloorIndex
 	}
 }
 
-void UFloorManager::LiftBuilding(const FString& BuildingName, bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished)
+void UFloorManager::LiftBuilding(const FString& BuildingName, bool bReverse, bool bLerp, bool bHidden)
 {
 	TArray<UFloorComponent*> FloorComponents = GetBuildingComponentArray(BuildingName);
 
 	for (auto& Itr : FloorComponents)
 	{
-		Itr->FloorLift(bReverse, bLerp, OnTimelineFinished);
+		Itr->FloorLift(bReverse, bLerp, bHidden);
 	}
 }
 
-void UFloorManager::ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp, FOnTimelineEvent OnTimelineFinished)
+void UFloorManager::ShowFloor(const FString& BuildingName, int32 FloorIndex, bool bReverse, bool bLerp, bool bHidden)
 {
 	TArray<UFloorComponent*> Components = GetFloorComponentHigher(BuildingName, FloorIndex);
 	for (auto& Itr : Components)
 	{
-		Itr->FloorLift(bReverse, bLerp, OnTimelineFinished);
+		Itr->FloorLift(bReverse, bLerp, bHidden);
 	}
 }
 

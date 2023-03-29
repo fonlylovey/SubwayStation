@@ -6,6 +6,8 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "FloorInstanceSubsystem.generated.h"
 
+
+
 /**
  * 
  */
@@ -17,8 +19,8 @@ class SUBWAYSTATION_API UFloorInstanceSubsystem : public UGameInstanceSubsystem
 private:
 	TQueue<int32> LiftFloorQueue;
 
-	UFUNCTION()
-	void FloorLiftFinished();
+	// UFUNCTION()
+	// void FloorLiftFinished();
 	
 public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
